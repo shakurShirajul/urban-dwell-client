@@ -6,6 +6,12 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'urbanJungle' : ['urbanJungle', 'sans-serif'],
+      'roboto' : ['Roboto', 'sans-serif'],
+      'mulish' : ['Mulish', 'sans-serif'],
+      'poppins' : ['Poppins', 'sans-serif'],
+    }
   },
   plugins: [
     require('daisyui'),

@@ -48,7 +48,7 @@ const AuthProviders = ({ children }) => {
             // Issueing a token 
             if (currentUser) {
                 axios.post(`http://localhost:5000/jwt`, loggedUser, { withCredentials: true })
-                    .then(res => console.log(res.data))
+                    // .then(res => console.log(res.data))
             } else {
                 axios.post(`http://localhost:5000/logout`, loggedUser, { withCredentials: true })
                 .then(res=>{console.log(res.data)})
@@ -78,7 +78,7 @@ const AuthProviders = ({ children }) => {
 
     const successToast = (toastMessage) => {
         toast.success(toastMessage, {
-            position: "top-center",
+            position: "top-right",
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,

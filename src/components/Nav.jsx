@@ -70,7 +70,7 @@ const Nav = () => {
                                                 <li className='pointer-events-none select-none cursor-default'>
                                                     <p className='font-semibold'>{user.displayName}</p>
                                                 </li>
-                                                <li><Link>Dashboard</Link></li>
+                                                <li><Link to='/dashboard'>Dashboard</Link></li>
                                                 <li><button onClick={handleLogOut}>Logout</button></li>
                                             </ul>
                                         </div>

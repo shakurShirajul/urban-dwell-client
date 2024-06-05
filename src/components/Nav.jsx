@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../assets/images/logo/urbanDwell.png'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Providers/AuthProviders';
 
 const Nav = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut();
+    }
+
     const NavBarLink =
         <>
             <li><a>Home</a></li>
             <li><a>Apartment</a></li>
         </>
+
+    console.log(user);
     return (
-        <div className='border-b'>
+        <div className='border-b font-poppins'>
             <div className='container mx-auto'>
                 <div className="navbar">
                     <div className="navbar-start">
@@ -46,11 +56,35 @@ const Nav = () => {
                     </div>
 
                     <div className="navbar-end">
-                        <Link to='/login' className=''><button className="btn btn-success">Login</button></Link>
+                        {
+                            user ?
+                                (
+                                    <div>
+                                        <div className="dropdown dropdown-end">
+                                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                                <div className="w-14 rounded-full">
+                                                    <img src={user.photoURL} />
+                                                </div>
+                                            </div>
+                                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                                <li className='pointer-events-none select-none cursor-default'>
+                                                    <p className='font-semibold'>{user.displayName}</p>
+                                                </li>
+                                                <li><Link>Dashboard</Link></li>
+                                                <li><button onClick={handleLogOut}>Logout</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )
+                                :
+                                (
+                                    <Link to='/login' className=''><button className="btn btn-success">Login</button></Link>
+                                )
+                        }
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

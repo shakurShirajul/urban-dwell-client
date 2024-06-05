@@ -76,7 +76,7 @@ const SignupForm = () => {
 
             if (res.data.success) {
                 const image_url = res.data.data.display_url;
-                const newUserData = { name, email, image: image_url }
+                const newUserData = { email, name, image: image_url }
                 console.log(image_url)
                 signUp(email, password)
                     .then((userCredential) => {

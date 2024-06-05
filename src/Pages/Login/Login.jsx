@@ -4,13 +4,16 @@ import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
 import LoginForm from "./LoginForm";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { ToastContainer } from "react-toastify";
 
 const Login = () => {
 
-    const { googleSignIn } = useContext(AuthContext);
+    const { googleSignIn, errorToast, successToast } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosPublic = useAxiosPublic();
 
     const navigateToPage = () => {
         setTimeout(() => {
@@ -18,22 +21,16 @@ const Login = () => {
         }, 2000);
     }
 
-    // const handleFormSubmit = (event) => {
-    //     const form = eve
-
-    // }
-
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
-                axios.post(`https://textify-black.vercel.app/setauthor`, {
+                axiosPublic.post(`/users`, {
                     email: result.user.email,
                     name: result.user.displayName,
-                    photo: result.user.photoURL,
+                    image: result.user.photoURL,
                 }, { withCredentials: true })
                 successToast('LOGIN SUCCESSFUL')
                 navigateToPage();
-
             })
             .catch((error) => {
                 errorToast(error.message)
@@ -51,15 +48,15 @@ const Login = () => {
                     <div className="">
                         <img src="https://i.ibb.co/cgcXs4h/High-Rise-Buildings-1.png" alt="" className="rounded-xl h-full" />
                     </div>
-                    <div className="space-y-5 ">
+                    <div className="space-y-5 p-8 border rounded-xl">
                         <h1 className="text-4xl font-bold text-left">Welcome Back</h1>
-                        <LoginForm navigateToPage={navigateToPage}/>
+                        <LoginForm navigateToPage={navigateToPage} />
                         <div className="flex items-center pt-4 space-x-1">
                             <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
                             <p className="px-3 text-sm dark:text-gray-600">Login with social accounts</p>
                             <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
                         </div>
-                        <button onSubmit={handleGoogleSignIn} type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600">
+                        <button onClick={handleGoogleSignIn} type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600">
                             <FcGoogle className="w-5 h-5" />
                             <p>Login with Google</p>
                         </button>
@@ -69,6 +66,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

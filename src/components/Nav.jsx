@@ -17,7 +17,6 @@ const Nav = () => {
             <li><Link to="/aparments">Apartment</Link></li>
         </>
 
-    console.log(user);
     return (
         <div className='border-b font-poppins'>
             <div className='container mx-auto'>

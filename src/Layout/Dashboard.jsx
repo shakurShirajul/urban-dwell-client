@@ -14,25 +14,24 @@ import PaidIcon from '@mui/icons-material/Paid';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
+import useAxiosSecure from '../hooks/userAxiosSecure';
 
 const Dashboard = () => {
 
     const activeButton = "border border-green-600 font-semibold";
+    const axiosSecure = useAxiosSecure();
 
     const { user } = useContext(AuthContext);
     const { data: role = [], isPending, isLoading } = useQuery({
         queryKey: ['role'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users/role?email=${user.email}`, { withCredentials: true })
+            const res = await axiosSecure.get(`/users/role?email=${user.email}`, { withCredentials: true })
             return res.data;
         }
     })
 
     const isRole = role.user_role;
     let sideBarNavigation;
-
-
-    console.log(isRole);
 
     const adminSide = <>
         <li><NavLink to='/dashboard/adminprofile' className={({ isActive }) => isActive && activeButton}><AdminPanelSettingsIcon />Admin Profile</NavLink></li>
@@ -68,7 +67,7 @@ const Dashboard = () => {
     return (
         <div className='p-5 lg:p-0'>
             <div className='flex flex-col lg:flex-row'>
-                <div className='lg:w-80 border border-green-800'>
+                <div className='lg:w-80'>
                     <div className="drawer lg:drawer-open">
                         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                         <div className="drawer-content">
@@ -79,10 +78,13 @@ const Dashboard = () => {
 
                         <div className="drawer-side">
                             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                            <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+
+                            <ul className="menu p-4 w-80 h-screen bg-base-200 text-base-content">
+                                
                                 {
                                     sideBarNavigation
                                 }
+
                                 <div className="divider"></div>
                                 <li>
                                     <NavLink to='/'>
@@ -90,11 +92,12 @@ const Dashboard = () => {
                                         Home
                                     </NavLink>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div className='flex-1 p-10 min-h-screen border border-green-950'>
+                <div className='flex-1 p-10 overflow-y-auto'>
                     <Outlet></Outlet>
                 </div>
             </div>

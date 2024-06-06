@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import MakeAnnouncementForm from './MakeAnnouncementForm';
 import { AuthContext } from '../../../Providers/AuthProviders';
-import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
+import useAxiosSecure from '../../../hooks/userAxiosSecure';
 
 const MakeAnnouncement = () => {
     const { user,successToast } = useContext(AuthContext);
+
+    const axiosSecure = useAxiosSecure();
 
     const handleAnnounce = (event) => {
         event.preventDefault();
@@ -18,7 +20,7 @@ const MakeAnnouncement = () => {
             announce_author_email: user.email,
         }
 
-        axios.post(`http://localhost:5000/announcement?email=${user.email}`, announcementData, { withCredentials: true })
+        axiosSecure.post(`/announcement?email=${user.email}`, announcementData, { withCredentials: true })
         .then(res=>{
             successToast("Announcement Created");
             form.reset();

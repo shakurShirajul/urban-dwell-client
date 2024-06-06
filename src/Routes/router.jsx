@@ -7,13 +7,16 @@ import Dashboard from "../Layout/Dashboard";
 import AdminProfile from "../Pages/Dashboard/AdminProfile";
 import ManageMembers from "../Pages/Dashboard/MangeMembers/ManageMembers";
 import MakeAnnouncement from "../Pages/Dashboard/MakeAnnouncement/MakeAnnouncement";
-import AgreementRequests from "../Pages/Dashboard/AgreementRequests";
+import AgreementRequests from "../Pages/Dashboard/AgreementRequests/AgreementRequests";
 import ManageCoupons from "../Pages/Dashboard/ManageCoupons";
 import MyProfile from "../Pages/Dashboard/MyProfile";
 import MakePayment from "../Pages/Dashboard/MakePayment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
-import Announcements from "../Pages/Dashboard/Announcements";
+import Announcements from "../Pages/Dashboard/Announcements/Announcements";
 import Apartments from "../Pages/Apartments/Apartments";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import MemberRoute from "./MemberRoute";
 
 const router = createBrowserRouter([
     {
@@ -34,49 +37,49 @@ const router = createBrowserRouter([
             },
             {
                 path: '/aparments',
-                element: <Apartments/>
+                element: <PrivateRoute><Apartments /></PrivateRoute>
             }
         ]
     },
     {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
                 path: 'adminprofile',
-                element: <AdminProfile />
+                element: <AdminRoute><AdminProfile /></AdminRoute>
             },
             {
                 path: 'managemember',
-                element: <ManageMembers />,
+                element: <AdminRoute><ManageMembers /></AdminRoute>,
             },
             {
                 path: 'makeannouncement',
-                element: <MakeAnnouncement />
+                element: <AdminRoute><MakeAnnouncement /></AdminRoute>,
             },
             {
                 path: 'agreementrequest',
-                element: <AgreementRequests />
+                element: <AdminRoute><AgreementRequests /></AdminRoute>,
             },
             {
                 path: 'managecoupons',
-                element: <ManageCoupons />
+                element: <AdminRoute><ManageCoupons /></AdminRoute>,
             },
             {
                 path: 'myprofile',
-                element: <MyProfile />
+                element: <PrivateRoute><MyProfile /></PrivateRoute>,
             },
             {
                 path: 'makepayment',
-                element: <MakePayment />
+                element: <MemberRoute><MakePayment /></MemberRoute>
             },
             {
                 path: 'paymenthistory',
-                element: <PaymentHistory />
+                element: <MemberRoute><PaymentHistory /></MemberRoute>
             },
             {
                 path: 'announcement',
-                element: <Announcements/>
+                element: <PrivateRoute><Announcements /></PrivateRoute>
             }
         ]
     }

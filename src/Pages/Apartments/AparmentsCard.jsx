@@ -3,7 +3,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import PaidIcon from '@mui/icons-material/Paid';
 1
-const AparmentsCard = ({ apartment, handleAgreement }) => {
+const AparmentsCard = ({ apartment, handleAgreement, agreement }) => {
     const { _id, apartment_image, floor_no, block_name, apartment_no, rent } = apartment;
     return (
         <div>
@@ -22,6 +22,7 @@ const AparmentsCard = ({ apartment, handleAgreement }) => {
                     </div>
                 </div>
                 <button
+                    disabled={agreement.length === 1}
                     onClick={() => handleAgreement(apartment)}
                     className="btn btn-primary w-full text-base text-white uppercase">Agreement</button>
             </div>

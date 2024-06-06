@@ -5,24 +5,26 @@ import auth from "../firebase/firebase.config";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 const AuthProviders = ({ children }) => {
 
     const [user, setUser] = useState(null);
-    const [loader, setLoader] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const axiosPublic = useAxiosPublic();
 
     const signIn = (email, password) => {
-        setLoader(true);
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
     const signUp = (email, password) => {
-        setLoader(true);
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
     const googleSignIn = () => {
-        setLoader(true);
+        setLoading(true);
         const googleProvider = new GoogleAuthProvider();
         return signInWithPopup(auth, googleProvider);
     }
@@ -34,31 +36,33 @@ const AuthProviders = ({ children }) => {
     }
 
     const logOut = () => {
-        setLoader(true);
+        setLoading(true);
         return signOut(auth);
     }
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            const userEmail = currentUser?.email || user?.email;
-            const loggedUser = { email: userEmail };
-            console.log("Changed");
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-
-            // Issueing a token 
             if (currentUser) {
-                axios.post(`http://localhost:5000/jwt`, loggedUser, { withCredentials: true })
-                    // .then(res => console.log(res.data))
-            } else {
-                axios.post(`http://localhost:5000/logout`, loggedUser, { withCredentials: true })
-                .then(res=>{console.log(res.data)})
+                const userInfo = { email: currentUser.email };
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            setLoading(false);
+                        }
+                    })
             }
-            setLoader(false);
+            else {
+                localStorage.removeItem('access-token');
+                setLoading(false);
+            }
+
         });
         return () => {
-            unSubscribe();
+            return unsubscribe();
         }
-    }, [])
+    }, [axiosPublic])
 
 
     // Toast Design
@@ -105,8 +109,8 @@ const AuthProviders = ({ children }) => {
     const authInfo = {
         user,
         setUser,
-        loader,
-        setLoader,
+        loading,
+        setLoading,
         signIn,
         signUp,
         updateUser,

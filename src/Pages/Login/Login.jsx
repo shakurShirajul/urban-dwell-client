@@ -15,9 +15,11 @@ const Login = () => {
     const location = useLocation();
     const axiosPublic = useAxiosPublic();
 
+    const from = location.state?.from?.pathname || "/";
+
     const navigateToPage = () => {
         setTimeout(() => {
-            navigate(location?.state ? location.state : "/");
+            navigate(from, { replace: true });
         }, 2000);
     }
 

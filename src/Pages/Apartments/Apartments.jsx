@@ -4,13 +4,27 @@ import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { ToastContainer } from 'react-toastify';
+import useAxiosSecure from '../../hooks/userAxiosSecure';
 
 const Apartments = () => {
+    
     const { user, successToast } = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure();
+
+    const { data: agreement = [], refetch } = useQuery({
+        queryKey: ['agreement'],
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/agreement?email=${user.email}`, { withCredentials: true });
+            return response.data;
+        }
+    })
+
+    console.log(agreement);
+
     const { data: apartments = [], isPending, isLoading } = useQuery({
         queryKey: ['apartments'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/apartments`, { withCredentials: true })
+            const res = await axiosSecure.get(`/apartments?email=${user.email}`, { withCredentials: true })
             return res.data;
         }
     })
@@ -25,12 +39,13 @@ const Apartments = () => {
             rent: apartment.rent,
         }
         console.log(agreementData)
-        axios.post(`http://localhost:5000/agreement?email=${user.email}`, agreementData, { withCredentials: true })
+        axiosSecure.post(`/agreement?email=${user.email}`, agreementData, { withCredentials: true })
             .then(response => {
+                refetch();
                 successToast("Agreement created");
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
+                // console.error('Error fetching data:', error);
             });
     }
 
@@ -40,7 +55,7 @@ const Apartments = () => {
                 <div className='grid grid-cols-3 gap-10'>
                     {
                         apartments.map(apartment =>
-                            <AparmentsCard key={apartment._id} apartment={apartment} handleAgreement={handleAgreement} />
+                            <AparmentsCard key={apartment._id} apartment={apartment} handleAgreement={handleAgreement} agreement={agreement} />
                         )
                     }
                 </div>

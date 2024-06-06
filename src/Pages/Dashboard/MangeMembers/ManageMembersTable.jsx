@@ -4,23 +4,25 @@ import MemeberTableRow from "./MemeberTableRow";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import { ToastContainer } from "react-toastify";
+import useAxiosSecure from "../../../hooks/userAxiosSecure";
 
 const ManageMembersTable = () => {
 
     const { successToast } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+    const { user } = useContext(AuthContext);
 
     const { data: members = [], isPending, isLoading, refetch } = useQuery({
         queryKey: ['members'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users?user_role=member`, { withCredentials: true })
+            const res = await axiosSecure.get(`/users/members?email=${user.email}`, { withCredentials: true })
             return res.data;
-
         }
     })
 
     const handleRemoveButton = async (id) => {
-        const res = await axios.patch(`http://localhost:5000/users/role?id=${id}`, { withCredentials: true});
-        if(res.data.modifiedCount>0){
+        const res = await axiosSecure.patch(`/users/role?email=${user.email}`, { id }, { withCredentials: true });
+        if (res.data.modifiedCount > 0) {
             successToast("Member removed successfully");
         }
         refetch();
@@ -48,7 +50,7 @@ const ManageMembersTable = () => {
                     </tbody>
                 </table>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };

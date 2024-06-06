@@ -13,8 +13,8 @@ const Nav = () => {
 
     const NavBarLink =
         <>
-            <li><a>Home</a></li>
-            <li><a>Apartment</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/aparments">Apartment</Link></li>
         </>
 
     console.log(user);

@@ -20,8 +20,6 @@ const ManageMembersTable = () => {
 
     const handleRemoveButton = async (id) => {
         const res = await axios.patch(`http://localhost:5000/users/role?id=${id}`, { withCredentials: true});
-        // console.log(res);
-        console.log(res.data);
         if(res.data.modifiedCount>0){
             successToast("Member removed successfully");
         }

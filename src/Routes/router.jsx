@@ -13,6 +13,7 @@ import MyProfile from "../Pages/Dashboard/MyProfile";
 import MakePayment from "../Pages/Dashboard/MakePayment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import Announcements from "../Pages/Dashboard/Announcements";
+import Apartments from "../Pages/Apartments/Apartments";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup></Signup>
+            },
+            {
+                path: '/aparments',
+                element: <Apartments/>
             }
         ]
     },

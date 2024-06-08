@@ -9,11 +9,14 @@ const PaymentHistoryTable = ({ paymentHistory, index }) => {
     const year = currentDate.getFullYear();
 
     return (
-        <tr>
+        <tr className='text-base font-medium'>
             <th>{index + 1}</th>
             <td>{`${date}-${month}-${year}`}</td>
             <td>{paymentHistory.transactionId}</td>
-            <td>Blue</td>
+            <td className='capitalize'>{paymentHistory.month}</td>
+            <td>{paymentHistory.coupon? paymentHistory.coupon : 'N/A'}</td>
+            <td>${paymentHistory.discount}</td>
+            <td>${paymentHistory.rent-paymentHistory.discount}</td>
         </tr>
     );
 };

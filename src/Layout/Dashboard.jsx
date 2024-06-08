@@ -81,7 +81,7 @@ const Dashboard = () => {
                         <div className="drawer-side z-[10]">
                             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
 
-                            <ul className="menu p-4 w-80 h-screen bg-white text-base-content">
+                            <ul className="menu p-4 w-80 h-screen bg-white text-base-content border-r">
                                 {
                                     sideBarNavigation
                                 }

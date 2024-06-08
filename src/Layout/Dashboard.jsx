@@ -22,6 +22,7 @@ const Dashboard = () => {
     const axiosSecure = useAxiosSecure();
 
     const { user } = useContext(AuthContext);
+
     const { data: role = [], isPending, isLoading } = useQuery({
         queryKey: ['role'],
         queryFn: async () => {
@@ -31,6 +32,7 @@ const Dashboard = () => {
     })
 
     const isRole = role.user_role;
+    
     let sideBarNavigation;
 
     const adminSide = <>
@@ -45,7 +47,7 @@ const Dashboard = () => {
         <li><NavLink to='/dashboard/myprofile' className={({ isActive }) => isActive && activeButton}><AccountBoxIcon />My Profile</NavLink></li>
         <li><NavLink to='/dashboard/makepayment' className={({ isActive }) => isActive && activeButton}><PaidIcon />Make Payment</NavLink></li>
         <li><NavLink to='/dashboard/paymenthistory' className={({ isActive }) => isActive && activeButton}><ReceiptIcon />Payment History</NavLink></li>
-        <li><NavLink to='/dashboard/announcement' className={({ isActive }) => isActive && activeButton}><CampaignIcon />Announcement</NavLink></li>
+        <li><NavLink to='/dashboard/announcement' className={({ isActive }) => isActive && activeButton}><CampaignIcon />Announcements</NavLink></li>
     </>;
 
     const userSide = <>
@@ -76,15 +78,13 @@ const Dashboard = () => {
                             </label>
                         </div>
 
-                        <div className="drawer-side">
+                        <div className="drawer-side z-[10]">
                             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
 
-                            <ul className="menu p-4 w-80 h-screen bg-base-200 text-base-content">
-                                
+                            <ul className="menu p-4 w-80 h-screen bg-white text-base-content">
                                 {
                                     sideBarNavigation
                                 }
-
                                 <div className="divider"></div>
                                 <li>
                                     <NavLink to='/'>
@@ -97,7 +97,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex-1 p-10 overflow-y-auto'>
+                <div className='flex-1 lg:p-10 overflow-y-auto'>
                     <Outlet></Outlet>
                 </div>
             </div>

@@ -2,14 +2,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 
 const AgreementRequestsTable = ({ agereementRequest, handleAcceptButton, handleRejectButton }) => {
-    const { _id, user_name, user_email, floor_no, block_name, apartment_no, rent, status, agreement_data } = agereementRequest;
+    const { _id, user_name, user_email, floor_no, block_name, apartment_no, rent, status, agreement_request_date } = agereementRequest;
 
     const monthNames = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
-    const currentDate = new Date(agreement_data);
+    const currentDate = new Date(agreement_request_date);
     const date = currentDate.getDate();
     const month = currentDate.getMonth();
     const year = currentDate.getFullYear();

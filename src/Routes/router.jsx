@@ -4,19 +4,20 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import Dashboard from "../Layout/Dashboard";
-import AdminProfile from "../Pages/Dashboard/AdminProfile";
+import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 import ManageMembers from "../Pages/Dashboard/MangeMembers/ManageMembers";
 import MakeAnnouncement from "../Pages/Dashboard/MakeAnnouncement/MakeAnnouncement";
 import AgreementRequests from "../Pages/Dashboard/AgreementRequests/AgreementRequests";
-import ManageCoupons from "../Pages/Dashboard/ManageCoupons";
+import ManageCoupons from "../Pages/Dashboard/ManageCoupon/ManageCoupons";
 import MyProfile from "../Pages/Dashboard/MyProfile";
-import MakePayment from "../Pages/Dashboard/MakePayment";
-import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
+import MakePayment from "../Pages/Dashboard/MakePayment/MakePayment";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import Announcements from "../Pages/Dashboard/Announcements/Announcements";
 import Apartments from "../Pages/Apartments/Apartments";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import MemberRoute from "./MemberRoute";
+import PaymentPage from "../Pages/Dashboard/MakePayment/PaymentPage";
 
 const router = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
             {
                 path: 'announcement',
                 element: <PrivateRoute><Announcements /></PrivateRoute>
+            },
+            {
+                path: "paymentpage",
+                element: <MemberRoute><PaymentPage/></MemberRoute>
             }
         ]
     }

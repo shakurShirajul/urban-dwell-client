@@ -2,10 +2,29 @@ import React, { useContext } from 'react';
 import logo from '../assets/images/logo/urbanDwell.png'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProviders';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/userAxiosSecure';
 
 const Nav = () => {
 
     const { user, logOut } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+
+    const { data: userRole = []} = useQuery({
+        queryKey: ['role'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/users/role?email=${user.email}`, { withCredentials: true })
+            return res.data;
+        }
+    })
+
+    const isRole = userRole.user_role;
+    
+    let dashboardNavigation = '/dashboard/myprofile';
+
+    if(isRole === 'admin'){
+        dashboardNavigation = '/dashboard/adminprofile'
+    }
 
     const handleLogOut = () => {
         logOut();
@@ -69,7 +88,7 @@ const Nav = () => {
                                                 <li className='pointer-events-none select-none cursor-default'>
                                                     <p className='font-semibold'>{user.displayName}</p>
                                                 </li>
-                                                <li><Link to='/dashboard'>Dashboard</Link></li>
+                                                <li><Link to={dashboardNavigation}>Dashboard</Link></li>
                                                 <li><button onClick={handleLogOut}>Logout</button></li>
                                             </ul>
                                         </div>

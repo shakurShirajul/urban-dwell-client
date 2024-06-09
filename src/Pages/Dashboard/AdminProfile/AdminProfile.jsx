@@ -3,6 +3,7 @@ import useAxiosSecure from '../../../hooks/userAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Providers/AuthProviders';
 import { MdOutlineMeetingRoom } from "react-icons/md";
+import { FaUser } from 'react-icons/fa';
 
 const AdminProfile = () => {
 
@@ -63,12 +64,44 @@ const AdminProfile = () => {
                     </div>
                 </div>
             </div>
-            <div className='mt-5'>
+            <div className='mt-5 flex flex-wrap justify-center gap-5'>
                 <div>
                     <div className="stats bg-primary text-primary-content" >
                         <div className="stat flex flex-col justify-center items-center">
                             <div className="stat-title text-white text-3xl font-semibold uppercase">Total Rooms</div>
                             <div className="stat-value flex justify-center items-center gap-2 text-white"><MdOutlineMeetingRoom  className='text-4xl'/>{stats.totalApartments}</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="stats bg-secondary text-primary-content" >
+                        <div className="stat flex flex-col justify-center items-center">
+                            <div className="stat-title text-white text-3xl font-semibold uppercase">Total User</div>
+                            <div className="stat-value flex justify-center items-center gap-2 text-white"><FaUser  className='text-4xl'/>{stats.totalUsers}</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="stats bg-accent text-primary-content" >
+                        <div className="stat flex flex-col justify-center items-center">
+                            <div className="stat-title text-white text-3xl font-semibold uppercase">Total Member</div>
+                            <div className="stat-value flex justify-center items-center gap-2 text-white"><FaUser  className='text-4xl'/>{stats.totalMembers}</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="stats bg-info text-primary-content" >
+                        <div className="stat flex flex-col justify-center items-center">
+                            <div className="stat-title text-white text-3xl font-semibold uppercase">Percentage Of Available Rooms</div>
+                            <div className="stat-value flex justify-center items-center gap-2 text-white"><MdOutlineMeetingRoom  className='text-4xl'/>{stats.percentageOfAvailableRoom}%</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="stats bg-warning text-primary-content" >
+                        <div className="stat flex flex-col justify-center items-center">
+                            <div className="stat-title text-white text-3xl font-semibold uppercase">Percentage Of Unavailable Rooms </div>
+                            <div className="stat-value flex justify-center items-center gap-2 text-white"><MdOutlineMeetingRoom  className='text-4xl'/>{stats.percentageOfUnavailableRoom}%</div>
                         </div>
                     </div>
                 </div>

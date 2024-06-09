@@ -1,10 +1,10 @@
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 
 
 const Banner = () => {
     return (
-        <Carousel>
+        <Carousel autoPlay interval={2000} infiniteLoop>
             <div>
                 <img src="https://i.ibb.co/bX1FfYS/8802751-ai.png" />
             </div>

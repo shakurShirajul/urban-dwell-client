@@ -99,7 +99,7 @@ const Nav = () => {
                                 (
                                     <Link to='/login' className=''>
                                         <button className="btn border"><LoginIcon />
-                                            <span className='text-base'>Login</span>
+                                            {/* <span className='text-base'>Login</span> */}
                                         </button>
                                     </Link>
                                 )

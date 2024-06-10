@@ -23,7 +23,7 @@ const Coupons = () => {
     return (
         <div className='container mx-auto'>
             <Swiper
-                slidesPerView={3}
+                slidesPerView={1}
                 spaceBetween={30}
                 freeMode={true}
                 pagination={{
@@ -32,7 +32,7 @@ const Coupons = () => {
                 modules={[FreeMode, Pagination]}
                 className="mySwiper"
             >
-                <div>
+                <div className='grid'>
                     {
                         coponsDisplays.map(couponsDisplay =>
                             <SwiperSlide>

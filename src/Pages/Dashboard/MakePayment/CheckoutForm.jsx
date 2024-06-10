@@ -142,7 +142,7 @@ const CheckoutForm = ({ paymentData }) => {
                             <fieldset className="w-full space-y-1">
                                 <div className="flex justify-center items-center gap-2">
                                     <div className='flex items-center gap-2 flex-1'>
-                                        <label className="block text-lg font-semibold">Coupon Code:</label>
+                                        <label className="block md:text-lg font-semibold">Coupon:</label>
                                         <input
                                             type="text"
                                             placeholder="Coupon Code"
@@ -154,8 +154,8 @@ const CheckoutForm = ({ paymentData }) => {
                                         type="button"
                                         disabled={disableCouponAddButton}
                                         onClick={handleCouponInput}
-                                        className='btn btn-active btn-secondary text-white text-base uppercase'>
-                                        Add Coupon
+                                        className='btn btn-active btn-secondary text-white md:text-base uppercase'>
+                                        ADD
                                     </button>
                                 </div>
                             </fieldset>

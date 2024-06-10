@@ -39,7 +39,7 @@ const MakePayment = () => {
                     <fieldset className="p-6 rounded-xl border border-gray-600 shadow-sm dark:bg-gray-50">
                         <h1 className='text-4xl font-extrabold text-gray-800 mb-5'>Make Payment:</h1>
                         <div className='space-y-5 font-roboto'>
-                            <div className="flex gap-5">
+                            <div className="flex flex-col lg:flex-row gap-5">
                                 <div className='flex-1 space-y-2'>
                                     <label className="text-lg font-medium">Name: </label>
                                     <input
@@ -57,7 +57,7 @@ const MakePayment = () => {
                                         className="w-full text-black rounded-lg py-2.5 pl-2 border" />
                                 </div>
                             </div>
-                            <div className='flex gap-5'>
+                            <div className='flex flex-col lg:flex-row gap-5'>
                                 <div className='flex-1 space-y-2'>
                                     <p className="text-lg font-medium">Block Name: </p>
                                     <input

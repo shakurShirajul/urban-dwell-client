@@ -2,8 +2,15 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import PaidIcon from '@mui/icons-material/Paid';
-1
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProviders';
+import { useNavigate } from 'react-router-dom';
+
 const AparmentsCard = ({ apartment, handleAgreement, agreement }) => {
+
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const { _id, apartment_image, floor_no, block_name, apartment_no, rent } = apartment;
     return (
         <div>
@@ -23,7 +30,7 @@ const AparmentsCard = ({ apartment, handleAgreement, agreement }) => {
                 </div>
                 <button
                     disabled={agreement.length === 1}
-                    onClick={() => handleAgreement(apartment)}
+                    onClick={() => { user ? handleAgreement(apartment) : navigate('/login') }}
                     className="btn btn-primary w-full text-base text-white uppercase">Agreement</button>
             </div>
         </div>

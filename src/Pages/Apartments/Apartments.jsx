@@ -26,7 +26,7 @@ const Apartments = () => {
     const { data: apartments = [], refetch: appartmentRefetch, isPending, isLoading } = useQuery({
         queryKey: ['apartments'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/apartments?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}`, { withCredentials: true });
+            const res = await axiosSecure.get(`/apartments?page=${currentPage}&limit=${itemsPerPage}`, { withCredentials: true });
 
             return res.data;
         }

@@ -45,50 +45,52 @@ const MyProfile = () => {
     console.log(user_name, user_email, user_image, block_name, floor_no, apartment_no);
 
     return (
-        <div className='border rounded-xl shadow-sm p-6 dark:bg-gray-50 space-y-2 font-roboto'>
-            <div>
-                <h1 className='text-3xl font-semibold'>User Profile: </h1>
-            </div>
-            <div className="">
-                <div className="flex flex-col lg:flex-row gap-6  rounded-xl ">
-                    <div>
-                        <div className="avatar">
-                            <div className="w-32 rounded">
-                                <img src={user_image} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex flex-col lg:flex-row justify-between w-full'>
+        <div>
+            <div className='border rounded-xl shadow-sm p-6 dark:bg-gray-50 space-y-2 font-roboto'>
+                <div>
+                    <h1 className='text-3xl font-semibold'>User Profile: </h1>
+                </div>
+                <div className="max-w-4xl mx-auto">
+                    <div className="flex flex-col lg:flex-row gap-6  rounded-xl ">
                         <div>
-                            <div className='w-full'>
-                                <h1 className='text-xl font-bold'>Personal Details: </h1>
-                                <div>
-                                    <div>
-                                        <p className='text-lg font-normal'> <span className='font-medium'>Name: </span>{user_name}</p>
-                                    </div>
-                                    <div>
-                                        <p className='text-lg font-normal'><span className='font-medium'>Email: </span>{user_email}</p>
-                                    </div>
+                            <div className="avatar">
+                                <div className="w-32 rounded">
+                                    <img src={user_image} />
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <h1 className='text-xl font-bold'>Apartment Details:</h1>
-                            <div className='grid grid-cols-1 lg:grid-cols-2'>
-                                <div>
+                        <div className='flex flex-col lg:flex-row justify-between w-full'>
+                            <div>
+                                <div className='w-full'>
+                                    <h1 className='text-xl font-bold'>Personal Details: </h1>
                                     <div>
-                                        <p className='text-lg font-normal'><span className='font-medium'>Block Name: </span>{block_name}</p>
-                                    </div>
-                                    <div>
-                                        <p className='text-lg font-normal'><span className='font-medium'>Floor No: </span>{floor_no}</p>
+                                        <div>
+                                            <p className='text-lg font-normal'> <span className='font-medium'>Name: </span>{user_name}</p>
+                                        </div>
+                                        <div>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Email: </span>{user_email}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
+                            </div>
+                            <div>
+                                <h1 className='text-xl font-bold'>Apartment Details:</h1>
+                                <div className=''>
                                     <div>
-                                        <p className='text-lg font-normal'><span className='font-medium'>Room No: </span>{apartment_no}</p>
+                                        <div>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Block Name: </span>{block_name}</p>
+                                        </div>
+                                        <div>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Floor No: </span>{floor_no}</p>
+                                        </div>
                                     </div>
                                     <div>
-                                        <p className='text-lg font-normal'><span className='font-medium'>Agreement Accept Date: </span>{agreementAcceptDate}</p>
+                                        <div>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Room No: </span>{apartment_no}</p>
+                                        </div>
+                                        <div>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Agreement Accept Date: </span>{agreementAcceptDate}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -20,11 +20,8 @@ const Coupons = () => {
         }
     })
 
-    // console.log(coponsDisplay)
-    console.log(coponsDisplays);
-
     return (
-        <div>
+        <div className='container mx-auto'>
             <Swiper
                 slidesPerView={3}
                 spaceBetween={30}

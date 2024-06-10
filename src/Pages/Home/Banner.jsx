@@ -14,20 +14,8 @@ const Banner = () => {
             <div>
                 <img src="https://i.ibb.co/vzRn4PJ/7340259-ai.png" />
             </div>
-            {/* <div>
-                <img src="https://i.ibb.co/Fx4KFP6/checkout.png" />
-            </div>
-            <div>
-                <img src="https://i.ibb.co/Fx4KFP6/checkout.png" />
-            </div>
-            <div>
-                <img src="https://i.ibb.co/Fx4KFP6/checkout.png" />
-            </div> */}
         </Carousel>
-    );
-    
-    
-    
+    );    
 };
 
 export default Banner;

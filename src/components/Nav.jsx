@@ -3,6 +3,7 @@ import logo from '../assets/images/logo/urbanDwell.png'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProviders';
 import { useQuery } from '@tanstack/react-query';
+import LoginIcon from '@mui/icons-material/Login';
 import useAxiosSecure from '../hooks/userAxiosSecure';
 
 const Nav = () => {
@@ -10,7 +11,7 @@ const Nav = () => {
     const { user, logOut } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
-    const { data: userRole = []} = useQuery({
+    const { data: userRole = [] } = useQuery({
         queryKey: ['role'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/role?email=${user.email}`, { withCredentials: true })
@@ -19,10 +20,10 @@ const Nav = () => {
     })
 
     const isRole = userRole.user_role;
-    
+
     let dashboardNavigation = '/dashboard/myprofile';
 
-    if(isRole === 'admin'){
+    if (isRole === 'admin') {
         dashboardNavigation = '/dashboard/adminprofile'
     }
 
@@ -96,7 +97,11 @@ const Nav = () => {
                                 )
                                 :
                                 (
-                                    <Link to='/login' className=''><button className="btn btn-success">Login</button></Link>
+                                    <Link to='/login' className=''>
+                                        <button className="btn border"><LoginIcon />
+                                            <span className='text-base'>Login</span>
+                                        </button>
+                                    </Link>
                                 )
                         }
                     </div>

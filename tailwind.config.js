@@ -11,6 +11,7 @@ export default {
       'roboto': ['Roboto', 'sans-serif'],
       'mulish': ['Mulish', 'sans-serif'],
       'poppins': ['Poppins', 'sans-serif'],
+      'gwendolyn': ["Gwendolyn", 'cursive'],
     }
   },
   plugins: [

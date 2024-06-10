@@ -29,7 +29,7 @@ const ManageMembersTable = () => {
     }
 
     return (
-        <div className="font-mulish">
+        <div className="font-mulish border rounded-xl">
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

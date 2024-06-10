@@ -46,11 +46,11 @@ const MyProfile = () => {
 
     return (
         <div>
-            <div className='border rounded-xl shadow-sm p-6 dark:bg-gray-50 space-y-2 font-roboto'>
+            <div className='border rounded-xl shadow-sm p-6 dark:bg-gray-50 space-y-5'>
                 <div>
-                    <h1 className='text-3xl font-semibold'>User Profile: </h1>
+                    <h1 className='text-4xl font-extrabold text-gray-800'>Profile: </h1>
                 </div>
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-4xl mx-auto font-roboto">
                     <div className="flex flex-col lg:flex-row gap-6  rounded-xl ">
                         <div>
                             <div className="avatar">

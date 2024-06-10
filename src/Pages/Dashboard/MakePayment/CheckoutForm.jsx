@@ -124,9 +124,8 @@ const CheckoutForm = ({ paymentData }) => {
                     })
                 setTimeout(() => {
                     navigate('/dashboard/paymenthistory')
-                    // location.reload();
                 }, 2000)
-               
+
             }
         }
     }
@@ -135,6 +134,9 @@ const CheckoutForm = ({ paymentData }) => {
         <div className='max-w-xl mx-auto'>
             <div className='p-6 rounded-md shadow-md bg-gray-50 border'>
                 <div className=''>
+                    <div className='flex items-center gap-2 space-y-2 mb-2'>
+                        <p className="text-xl font-semibold py-2.5">Rent: <span>${rentPrice - discountAmount}</span></p>
+                    </div>
                     <form onSubmit={handleSubmit} className='space-y-5'>
                         <div>
                             <fieldset className="w-full space-y-1">

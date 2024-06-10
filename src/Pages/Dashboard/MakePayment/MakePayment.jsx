@@ -1,7 +1,3 @@
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from './CheckoutForm';
-import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/userAxiosSecure';
 import { useContext } from 'react';
@@ -11,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const MakePayment = () => {
 
-    // member name, email, floor, block name, apartment no, rent
     const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -39,17 +34,14 @@ const MakePayment = () => {
     }
     return (
         <div>
-            {/* <Elements stripe={stripePromise}>
-                <CheckoutForm></CheckoutForm>
-            </Elements> */}
-            <section className="p-6 font-roboto">
+            <section className="p-6">
                 <form onSubmit={handleMakePaymentForm} className="container flex flex-col mx-auto space-y-12">
                     <fieldset className="p-6 rounded-xl border border-gray-600 shadow-sm dark:bg-gray-50">
-                        <h1 className='text-3xl font-semibold'>Make Payment:</h1>
-                        <div className='space-y-5'>
+                        <h1 className='text-4xl font-extrabold text-gray-800 mb-5'>Make Payment:</h1>
+                        <div className='space-y-5 font-roboto'>
                             <div className="flex gap-5">
                                 <div className='flex-1 space-y-2'>
-                                    <label className="text-lg">Member Name: </label>
+                                    <label className="text-lg font-medium">Name: </label>
                                     <input
                                         type="text"
                                         disabled
@@ -57,7 +49,7 @@ const MakePayment = () => {
                                         className="w-full text-black rounded-lg py-2.5 pl-2 border" />
                                 </div>
                                 <div className='flex-1 space-y-2'>
-                                    <label className="text-lg">Email: </label>
+                                    <label className="text-lg font-medium">Email: </label>
                                     <input
                                         type="email"
                                         disabled
@@ -67,7 +59,7 @@ const MakePayment = () => {
                             </div>
                             <div className='flex gap-5'>
                                 <div className='flex-1 space-y-2'>
-                                    <p className="text-lg">Block Name: </p>
+                                    <p className="text-lg font-medium">Block Name: </p>
                                     <input
                                         type="text"
                                         disabled
@@ -75,7 +67,7 @@ const MakePayment = () => {
                                         className="w-full text-black rounded-lg py-2.5 pl-2 border" />
                                 </div>
                                 <div className='flex-1 space-y-2'>
-                                    <p className="text-lg">Floor No:</p>
+                                    <p className="text-lg font-medium">Floor No:</p>
                                     <input
                                         disabled
                                         value={floor_no}
@@ -83,7 +75,7 @@ const MakePayment = () => {
                                         className="w-full text-black rounded-lg py-2.5 pl-2 border" />
                                 </div>
                                 <div className='flex-1 space-y-2'>
-                                    <p className="text-lg">Room No:</p>
+                                    <p className="text-lg font-medium">Room No:</p>
                                     <input
                                         type="text"
                                         disabled
@@ -91,7 +83,7 @@ const MakePayment = () => {
                                         className="w-full text-black rounded-lg py-2.5 pl-2 border" />
                                 </div>
                                 <div className='flex-1 space-y-2'>
-                                    <label className="text-lg">Rent:</label>
+                                    <label className="text-lg font-medium">Rent:</label>
                                     <input
                                         type="text"
                                         disabled
@@ -99,7 +91,7 @@ const MakePayment = () => {
                                         className="w-full text-black rounded-lg py-2.5 pl-2 border" />
                                 </div>
                                 <div className='flex-1 space-y-2'>
-                                    <label className="text-lg">Payment Month:</label>
+                                    <label className="text-lg font-medium">Payment Month:</label>
                                     <select
                                         name='calender'
                                         required
@@ -121,7 +113,7 @@ const MakePayment = () => {
                                 </div>
                             </div>
                             <div className='flex justify-end'>
-                                <input type="submit" value="Make Payment" className="btn btn-success text-white text-base" />
+                                <input type="submit" value="Submit" className="btn btn-success text-white text-base" />
                             </div>
                         </div>
                     </fieldset>

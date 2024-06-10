@@ -21,7 +21,7 @@ const Announcements = () => {
 
     return (
         <div>
-            <p className='text-4xl font-semibold mb-5'>Announcements</p>
+            <p className='text-4xl font-extrabold text-gray-800 mb-5'>Announcements</p>
             <div className='space-y-2'>
                 {
                     announcements.map(announcement =>

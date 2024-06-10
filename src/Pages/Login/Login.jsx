@@ -46,7 +46,7 @@ const Login = () => {
                 <title>Login | Urban Dwell</title>
             </Helmet>
             <div className="w-full p-8 space-y-3 rounded-xl ">
-                <div className="grid grid-cols-2 gap-10">
+                <div className="grid lg:grid-cols-2 gap-10">
                     <div className="">
                         <img src="https://i.ibb.co/cgcXs4h/High-Rise-Buildings-1.png" alt="" className="rounded-xl h-full" />
                     </div>
@@ -62,8 +62,8 @@ const Login = () => {
                             <FcGoogle className="w-5 h-5" />
                             <p>Login with Google</p>
                         </button>
-                        <p className="text-xs text-center sm:px-6 dark:text-gray-600">Don't have an account?
-                            <Link to='/signup' className="underline dark:text-gray-800">Sign up</Link>
+                        <p className="text-center sm:px-6 dark:text-gray-600">Don't have an account?
+                            <Link to='/signup' className="underline dark:text-gray-800"> Sign up</Link>
                         </p>
                     </div>
                 </div>

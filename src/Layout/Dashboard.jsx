@@ -15,6 +15,7 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
 import useAxiosSecure from '../hooks/userAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = () => {
 
@@ -32,7 +33,7 @@ const Dashboard = () => {
     })
 
     const isRole = role.user_role;
-    
+
     let sideBarNavigation;
 
     const adminSide = <>
@@ -68,6 +69,9 @@ const Dashboard = () => {
 
     return (
         <div className='p-5 lg:p-0'>
+            <Helmet>
+                <title>Dashboard | Urban Dwell</title>
+            </Helmet>
             <div className='flex flex-col lg:flex-row'>
                 <div className='lg:w-80'>
                     <div className="drawer lg:drawer-open">
@@ -88,7 +92,7 @@ const Dashboard = () => {
                                 <div className="divider"></div>
                                 <li>
                                     <NavLink to='/'>
-                                        <HomeIcon/>
+                                        <HomeIcon />
                                         Home
                                     </NavLink>
                                 </li>

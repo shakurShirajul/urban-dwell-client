@@ -67,7 +67,7 @@ const AdminProfile = () => {
             <div className='flex flex-col justify-center items-center space-y-5 mt-10'>
                 <div className='flex flex-col gap-5 md:flex-row'>
                     <div>
-                        <div className="stats bg-primary text-primary-content" >
+                        <div className="stats bg-primary text-primary-content w-full" >
                             <div className="stat flex flex-col justify-center items-center">
                                 <div className="stat-title text-white text-3xl font-semibold uppercase">Total Rooms</div>
                                 <div className="stat-value flex justify-center items-center gap-2 text-white"><MdOutlineMeetingRoom className='text-4xl' />{stats.totalApartments}</div>
@@ -75,7 +75,7 @@ const AdminProfile = () => {
                         </div>
                     </div>
                     <div>
-                        <div className="stats bg-secondary text-primary-content" >
+                        <div className="stats bg-secondary text-primary-content w-full" >
                             <div className="stat flex flex-col justify-center items-center">
                                 <div className="stat-title text-white text-3xl font-semibold uppercase">Total User</div>
                                 <div className="stat-value flex justify-center items-center gap-2 text-white"><FaUser className='text-4xl' />{stats.totalUsers}</div>
@@ -83,7 +83,7 @@ const AdminProfile = () => {
                         </div>
                     </div>
                     <div>
-                        <div className="stats bg-accent text-primary-content" >
+                        <div className="stats bg-accent text-primary-content w-full" >
                             <div className="stat flex flex-col justify-center items-center">
                                 <div className="stat-title text-white text-3xl font-semibold uppercase">Total Member</div>
                                 <div className="stat-value flex justify-center items-center gap-2 text-white"><FaUser className='text-4xl' />{stats.totalMembers}</div>
@@ -93,7 +93,7 @@ const AdminProfile = () => {
                 </div>
                 <div className='flex flex-col gap-5 md:flex-row'>
                     <div>
-                        <div className="stats bg-info text-primary-content" >
+                        <div className="stats bg-info text-primary-content w-full" >
                             <div className="stat flex flex-col justify-center items-center">
                                 <div className="stat-title text-white text-3xl font-semibold uppercase">Available Rooms</div>
                                 <div className="stat-value flex justify-center items-center gap-2 text-white"><MdOutlineMeetingRoom className='text-4xl' />{stats.percentageOfAvailableRoom}%</div>
@@ -101,7 +101,7 @@ const AdminProfile = () => {
                         </div>
                     </div>
                     <div>
-                        <div className="stats bg-warning text-primary-content" >
+                        <div className="stats bg-warning text-primary-content w-full" >
                             <div className="stat flex flex-col justify-center items-center">
                                 <div className="stat-title text-white text-3xl font-semibold uppercase">Unavailable Rooms </div>
                                 <div className="stat-value flex justify-center items-center gap-2 text-white"><MdOutlineMeetingRoom className='text-4xl' />{stats.percentageOfUnavailableRoom}%</div>

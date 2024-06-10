@@ -1,8 +1,8 @@
 Website Name: Urban Dwell
 
-Admin Username:
-Admin Email: 
-Admin Password: 
+Admin Username: Shirajul Islam
+Admin Email: siirajulisllam@gmail.com
+Admin Password: Shirajul123@!
 
 Features and Characteristics of Websites:
 

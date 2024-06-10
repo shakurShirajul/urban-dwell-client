@@ -60,7 +60,7 @@ const ManageCoupons = () => {
                     onClick={() => document.getElementById('my_modal_5').showModal()}>
                     Add Coupon
                 </button>
-                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <dialog className="modal modal-bottom sm:modal-middle">
                     <form onSubmit={handleCreateCoupon} className="modal-box">
                         <div className='space-y-2'>
                             <div className='flex gap-5'>

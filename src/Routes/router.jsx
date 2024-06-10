@@ -18,11 +18,13 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import MemberRoute from "./MemberRoute";
 import PaymentPage from "../Pages/Dashboard/MakePayment/PaymentPage";
+import PageNotFound from "../components/PageNotFound";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
+        errorElement: <PageNotFound/>,
         children: [
             {
                 path: "/",
@@ -46,6 +48,7 @@ const router = createBrowserRouter([
     {
         path: "dashboard",
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        errorElement: <PageNotFound/>,
         children: [
             {
                 path: 'adminprofile',

@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/userAxiosSecure';
+import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-
+    const navigate = useNavigate();
 
     const { data: roleMyProfile = [], isPending, isLoading } = useQuery({
         queryKey: ['roleMyProfile'],
@@ -17,6 +18,10 @@ const MyProfile = () => {
     })
 
     const isRole = roleMyProfile.user_role;
+
+    if(isRole === 'admin'){
+        navigate('/dashboard/adminprofile');
+    }
 
 
     const { data: userData = [], refetch } = useQuery({

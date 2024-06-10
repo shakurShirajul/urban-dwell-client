@@ -14,7 +14,7 @@ const CouponCodeTable = ({ couponCode, index, handleCouponDisable }) => {
                     <div className='flex gap-2'>
                         <button
                             onClick={() => handleCouponDisable(couponCode.coupon_Code)}
-                            className="btn btn-error flex justify-center items-center text-white text-base">
+                            className="btn btn-error p-1 md:p-2 flex justify-center items-center text-white text-sm md:text-base">
                             <CloseIcon className='text-white' />
                             <span>Disable</span>
                         </button>

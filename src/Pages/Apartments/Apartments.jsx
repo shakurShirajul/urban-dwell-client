@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { ToastContainer } from 'react-toastify';
 import useAxiosSecure from '../../hooks/userAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const Apartments = () => {
 
@@ -87,8 +88,11 @@ const Apartments = () => {
 
     return (
         <div className='my-10'>
+            <Helmet>
+                <title>Urban Dwell | Apartments</title>
+            </Helmet>
             <div className='flex justify-center'>
-                <div className='grid grid-cols-3 gap-10'>
+                <div className='grid mx-5 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-10'>
                     {
                         apartments.map(apartment =>
                             <AparmentsCard key={apartment._id} apartment={apartment} handleAgreement={handleAgreement} agreement={agreement} />

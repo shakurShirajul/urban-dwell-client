@@ -34,7 +34,7 @@ const Nav = () => {
     const NavBarLink =
         <>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/aparments">Apartment</Link></li>
+            <li><Link to="/aparments">Apartments</Link></li>
         </>
 
     return (

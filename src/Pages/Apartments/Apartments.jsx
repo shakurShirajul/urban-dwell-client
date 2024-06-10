@@ -89,7 +89,7 @@ const Apartments = () => {
     return (
         <div className='my-10'>
             <Helmet>
-                <title>Urban Dwell | Apartments</title>
+                <title>Apartments || Urban Dwell</title>
             </Helmet>
             <div className='flex justify-center'>
                 <div className='grid mx-5 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-10'>

@@ -7,6 +7,18 @@ const MyProfile = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
+
+    const { data: roleMyProfile = [], isPending, isLoading } = useQuery({
+        queryKey: ['roleMyProfile'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/users/role?email=${user.email}`, { withCredentials: true })
+            return res.data;
+        }
+    })
+
+    const isRole = roleMyProfile.user_role;
+
+
     const { data: userData = [], refetch } = useQuery({
         queryKey: ['userData'],
         queryFn: async () => {
@@ -78,18 +90,18 @@ const MyProfile = () => {
                                 <div className=''>
                                     <div>
                                         <div>
-                                            <p className='text-lg font-normal'><span className='font-medium'>Block Name: </span>{block_name}</p>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Block Name: </span>{isRole == "member" ? block_name: "None"}</p>
                                         </div>
                                         <div>
-                                            <p className='text-lg font-normal'><span className='font-medium'>Floor No: </span>{floor_no}</p>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Floor No: </span>{isRole == "member" ? floor_no: "None"}</p>
                                         </div>
                                     </div>
                                     <div>
                                         <div>
-                                            <p className='text-lg font-normal'><span className='font-medium'>Room No: </span>{apartment_no}</p>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Room No: </span>{isRole == "member" ? apartment_no : "None"}</p>
                                         </div>
                                         <div>
-                                            <p className='text-lg font-normal'><span className='font-medium'>Agreement Accept Date: </span>{agreementAcceptDate}</p>
+                                            <p className='text-lg font-normal'><span className='font-medium'>Agreement Accept Date: </span>{isRole == "member" ? agreementAcceptDate : "None"}</p>
                                         </div>
                                     </div>
                                 </div>

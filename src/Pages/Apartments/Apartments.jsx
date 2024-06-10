@@ -1,15 +1,19 @@
 import axios from 'axios';
 import AparmentsCard from './AparmentsCard';
 import { useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { ToastContainer } from 'react-toastify';
 import useAxiosSecure from '../../hooks/userAxiosSecure';
 
 const Apartments = () => {
-    
+
     const { user, successToast } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure();
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 6;
+
 
     const { data: agreement = [], refetch } = useQuery({
         queryKey: ['agreement'],
@@ -19,15 +23,27 @@ const Apartments = () => {
         }
     })
 
-    console.log(agreement);
-
-    const { data: apartments = [], isPending, isLoading } = useQuery({
+    const { data: apartments = [], refetch: appartmentRefetch, isPending, isLoading } = useQuery({
         queryKey: ['apartments'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/apartments?email=${user.email}`, { withCredentials: true })
+            const res = await axiosSecure.get(`/apartments?email=${user.email}&page=${currentPage}&limit=${itemsPerPage}`, { withCredentials: true });
+
             return res.data;
         }
     })
+
+    // 
+    const { data: apartmentsLength = [] } = useQuery({
+        queryKey: ['apartmentsLength'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/appartment/length?email=${user.email}`, { withCredentials: true });
+            return res.data;
+        }
+    })
+
+    const numberOfPages = Math.ceil(apartmentsLength.length / itemsPerPage);
+
+    const pages = [...Array(numberOfPages).keys()];
 
     const handleAgreement = async (apartment) => {
         const agreementData = {
@@ -49,6 +65,26 @@ const Apartments = () => {
             });
     }
 
+    useEffect(() => {
+        appartmentRefetch();
+    }, [currentPage])
+
+    const handlePageClick = (page) => {
+        setCurrentPage(page);
+    }
+
+    const handlePrevPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    }
+
+    const handleNextPage = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
+
     return (
         <div className='my-10'>
             <div className='flex justify-center'>
@@ -62,16 +98,28 @@ const Apartments = () => {
             </div>
             <div className='flex justify-center mt-10'>
                 <div className="flex justify-center space-x-1 dark:text-gray-800">
-                    <button title="previous" type="button" className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md dark:bg-gray-50 dark:border-gray-100">
+                    <button
+                        onClick={handlePrevPage}
+                        type="button"
+                        className="btn btn-square">
                         <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="w-4">
                             <polyline points="15 18 9 12 15 6"></polyline>
                         </svg>
                     </button>
-                    <button type="button" title="Page 1" className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md dark:bg-gray-50 dark:text-violet-600 dark:border-violet-600">1</button>
-                    <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-gray-50 dark:border-gray-100" title="Page 2">2</button>
-                    <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-gray-50 dark:border-gray-100" title="Page 3">3</button>
-                    <button type="button" className="inline-flex items-center justify-center w-8 h-8 text-sm border rounded shadow-md dark:bg-gray-50 dark:border-gray-100" title="Page 4">4</button>
-                    <button title="next" type="button" className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md dark:bg-gray-50 dark:border-gray-100">
+                    {
+                        pages.map(page =>
+                            <input
+                                key={page}
+                                onClick={() => handlePageClick(page)}
+                                className="join-item btn btn-square" type="radio" name="options" aria-label={page}
+                                checked={currentPage === page ? 'selected' : undefined}
+                            />
+                        )
+                    }
+                    <button
+                        onClick={handleNextPage}
+                        type="button"
+                        className="btn btn-square">
                         <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="w-4">
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>

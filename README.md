@@ -28,7 +28,7 @@ UrbanDwell addresses the challenges associated with apartment management by cent
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/craftoopia.git
+   git clone https://github.com/shakurShirajul/urban-dwell-client.git
 2. Navigate to the project directory:
    ```bash
    cd urban-dwell-client

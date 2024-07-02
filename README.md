@@ -31,7 +31,7 @@ UrbanDwell addresses the challenges associated with apartment management by cent
    git clone https://github.com/yourusername/craftoopia.git
 2. Navigate to the project directory:
    ```bash
-   cd craftoopia
+   cd urban-dwell-client
 3. Install dependencies:
    ```bash
    npm install

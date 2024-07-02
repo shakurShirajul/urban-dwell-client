@@ -1,37 +1,40 @@
-Website Name: Urban Dwell
+## Project Overview
 
-Admin Username: Shirajul Islam
-Admin Email: siirajulisllam@gmail.com
-Admin Password: Shirajul123@!
+UrbanDwell is a Building Management System (BMS) web application designed to simplify apartment management processes. It provides a seamless experience for users to explore apartments, manage agreements, and handle payments effectively.
 
-Features and Characteristics of Websites:
+## Project Concept
 
-* User Authentication via Firebase: 
-  - Utilizing Firebase for authentication ensures secure user registration, login, and account management. Users can create accounts using their email addresses or social media accounts, enhancing convenience and security.
+The project aims to streamline the complexities of apartment management by offering a user-friendly interface for tenants and administrators. It enhances user interaction through intuitive features and ensures secure transactions.
 
-* Hassle-free Apartment Selection:
-  - Browse through available apartments effortlessly, with comprehensive details and an easy agreement process.
+## Problem Solved
 
-* Convenient Location Information: 
-  - Help users find their way with clear directions and maps, ensuring they can easily locate and reach the apartments.
+UrbanDwell addresses the challenges associated with apartment management by centralizing tasks such as apartment browsing, agreement handling, and payment management. It offers a robust solution for tenants and administrators alike.
 
-* TanStack Query: 
-  - Simplifies data fetching and caching by providing a declarative API for managing remote and local data. Supports complex data fetching scenarios such as pagination, filtering, and caching.Integrates seamlessly with TanStack Table for fetching data and updating table state.   
+## Three Major Features
 
-* Interactive User Interface:
-    - The website features an intuitive and user-friendly interface that makes it easy for users to navigate, browse, and interact with the content.
+1. **Responsive Design**: Optimized for desktop, tablet, and mobile devices.
+2. **User Dashboard**: Enables tenants to manage profiles, agreements, and payments.
+3. **Admin Control**: Empowers administrators to oversee members, announcements, and agreement requests.
 
-* Flexible Coupon Management:
-    - Enable admins to easily manage coupons, including adding new ones, editing existing ones, and adjusting availability as needed.
+## Technologies Used
 
-* Dashboard: 
-    - Dedicated Dashboard For User, Member and Admin.
+- Frontend: React, Tailwind CSS
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Authentication: JWT
+- Environment Management: Firebase
 
-* Secure Authentication: 
-    - Ensure the security of user accounts with JWT-based login authentication.
+## Getting Started
 
-* Seamless Payment Integration:
-    - Integrate the Stripe payment gateway seamlessly into the website, allowing users to make secure payments using various payment methods.
-
-* Responsive Design:
-    - The website is designed to be responsive, providing optimal viewing and interaction across different devices and screen sizes.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/craftoopia.git
+2. Navigate to the project directory:
+   ```bash
+   cd craftoopia
+3. Install dependencies:
+   ```bash
+   npm install
+4. Start the development server:
+   ```bash
+   npm run dev

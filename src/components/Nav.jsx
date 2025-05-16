@@ -35,10 +35,10 @@ const Nav = () => {
   const NavBarLink = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <NavLink to="/aparments">Apartments</NavLink>
+        <Link to="/aparments">Apartments</Link>
       </li>
     </>
   );
@@ -46,7 +46,7 @@ const Nav = () => {
   return (
     <div className="border-b z-50 font-roboto fixed w-full bg-white/90 backdrop-blur shadow-md">
       <div className="max-w-7xl mx-auto">
-        <div className="navbar    ">
+        <div className="navbar">
           <div className="navbar-start">
             <div className="dropdown">
               <div
@@ -54,6 +54,7 @@ const Nav = () => {
                 role="button"
                 className="btn btn-ghost lg:hidden"
               >
+                {/* Urban Dwell Logo */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -71,7 +72,7 @@ const Nav = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-roboto"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-roboto "
               >
                 {NavBarLink}
               </ul>

@@ -101,7 +101,7 @@ const Apartments = () => {
   };
 
   return (
-    <div className="pt-24">
+    <div className="pt-28">
       <Helmet>
         <title>Apartments || Urban Dwell</title>
       </Helmet>

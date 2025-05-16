@@ -165,47 +165,61 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="p-5 lg:p-0">
-      <Helmet>
-        <title>Dashboard | Urban Dwell</title>
-      </Helmet>
-      <div className="flex flex-col lg:flex-row">
-        <div className="lg:w-80">
-          <div className="drawer lg:drawer-open">
-            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content">
-              <label
-                htmlFor="my-drawer-2"
-                className="btn btn-primary drawer-button mb-5 lg:hidden"
-              >
-                <MenuOpenIcon />
-              </label>
+    <div>
+      {isLoading ? (
+        <div className="flex h-screen items-center justify-center space-x-2">
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+        </div>
+      ) : (
+        <div className="p-5 lg:p-0">
+          <Helmet>
+            <title>Dashboard | Urban Dwell</title>
+          </Helmet>
+          <div className="flex flex-col lg:flex-row">
+            <div className="lg:w-80">
+              <div className="drawer lg:drawer-open">
+                <input
+                  id="my-drawer-2"
+                  type="checkbox"
+                  className="drawer-toggle"
+                />
+                <div className="drawer-content">
+                  <label
+                    htmlFor="my-drawer-2"
+                    className="btn btn-primary drawer-button mb-5 lg:hidden"
+                  >
+                    <MenuOpenIcon />
+                  </label>
+                </div>
+
+                <div className="drawer-side z-[10]">
+                  <label
+                    htmlFor="my-drawer-2"
+                    aria-label="close sidebar"
+                    className="drawer-overlay"
+                  ></label>
+
+                  <ul className="menu p-4 w-80 h-screen bg-white text-base-content border-r">
+                    {sideBarNavigation}
+                    <div className="divider"></div>
+                    <li>
+                      <NavLink to="/">
+                        <HomeIcon />
+                        Home
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-
-            <div className="drawer-side z-[10]">
-              <label
-                htmlFor="my-drawer-2"
-                aria-label="close sidebar"
-                className="drawer-overlay"
-              ></label>
-
-              <ul className="menu p-4 w-80 h-screen bg-white text-base-content border-r">
-                {sideBarNavigation}
-                <div className="divider"></div>
-                <li>
-                  <NavLink to="/">
-                    <HomeIcon />
-                    Home
-                  </NavLink>
-                </li>
-              </ul>
+            <div className="flex-1 lg:p-10 overflow-y-auto">
+              <Outlet></Outlet>
             </div>
           </div>
         </div>
-        <div className="flex-1 lg:p-10 overflow-y-auto">
-          <Outlet></Outlet>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

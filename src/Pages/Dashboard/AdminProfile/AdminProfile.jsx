@@ -43,7 +43,7 @@ const AdminProfile = () => {
       ) : (
         <div className="font-mulish">
           <div className="mb-5">
-            <h1 className="text-3xl font-semibold">User Profile: </h1>
+            <h1 className="text-4xl font-extrabold">User Profile: </h1>
           </div>
           <div className="space-y-5">
             {/* Personal Details */}

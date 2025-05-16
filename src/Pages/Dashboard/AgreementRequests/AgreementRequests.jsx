@@ -9,7 +9,11 @@ const AgreementRequests = () => {
   const { user, successToast, updateToast } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
-  const { data: agereementsRequests = [], refetch } = useQuery({
+  const {
+    data: agereementsRequests = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["agereementRequest"],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -45,36 +49,46 @@ const AgreementRequests = () => {
   };
 
   return (
-    <div className="font-mulish">
-      <p className="text-4xl font-extrabold mb-5">Agreement Request</p>
+    <div>
+      {isLoading ? (
+        <div className="flex h-screen items-center justify-center space-x-2">
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+        </div>
+      ) : (
+        <div className="font-mulish">
+          <p className="text-4xl font-extrabold mb-5">Agreement Request</p>
 
-      <div className="overflow-x-auto bg-gray-100 rounded-md shadow-md border border-gray-100">
-        <table className="table">
-          <thead className="text-lg text-black font-bold">
-            <tr>
-              <th>User Name</th>
-              <th>User Email</th>
-              <th>Floor No</th>
-              <th>Block Name</th>
-              <th>Room No</th>
-              <th>Rent</th>
-              <th>Agreement Request Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {agereementsRequests.map((agereementRequest) => (
-              <AgreementRequestsTable
-                key={agereementRequest._id}
-                agereementRequest={agereementRequest}
-                handleAcceptButton={handleAcceptButton}
-                handleRejectButton={handleRejectButton}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <ToastContainer />
+          <div className="overflow-x-auto bg-gray-100 rounded-md shadow-md border border-gray-100">
+            <table className="table">
+              <thead className="text-lg text-black font-bold">
+                <tr>
+                  <th>User Name</th>
+                  <th>User Email</th>
+                  <th>Floor No</th>
+                  <th>Block Name</th>
+                  <th>Room No</th>
+                  <th>Rent</th>
+                  <th>Agreement Request Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {agereementsRequests.map((agereementRequest) => (
+                  <AgreementRequestsTable
+                    key={agereementRequest._id}
+                    agereementRequest={agereementRequest}
+                    handleAcceptButton={handleAcceptButton}
+                    handleRejectButton={handleRejectButton}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <ToastContainer />
+        </div>
+      )}
     </div>
   );
 };

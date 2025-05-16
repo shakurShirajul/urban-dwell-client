@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
-    errorElement: <PageNotFound />,
+    // errorElement: <PageNotFound />,
     children: [
       {
         path: "adminprofile",

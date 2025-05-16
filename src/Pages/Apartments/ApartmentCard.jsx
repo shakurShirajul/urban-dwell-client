@@ -15,14 +15,15 @@ const AparmentsCard = ({ apartment, handleAgreement, agreement }) => {
   return (
     <div>
       <div className="card w-96 bg-base-100 shadow-xl p-5 border font-mulish">
-        <figure className="">
+        <figure>
           <img
             src={apartment_image}
             alt="Apartment Image"
-            className="rounded-xl"
+            className="rounded-xl h-60 w-full"
           />
         </figure>
-        <div className="my-5">
+        <div className="mt-5 space-y-1">
+          {/* Floor Block Apartment No */}
           <div className="">
             <div className="flex items-center justify-between">
               <h2 className="flex items-center gap-0.5 text-sm">
@@ -40,23 +41,29 @@ const AparmentsCard = ({ apartment, handleAgreement, agreement }) => {
               </h2>
             </div>
           </div>
-
-          <div className="flex">
-            <h2 className="flex items-center gap-0.5 text-green-600 text-2xl">
-              <PaidIcon />
-              RENT: ${rent}
+          {/* Rent */}
+          <div className="flex items-center justify-end py-1">
+            <h2 className="flex font-semibold items-center gap-1 text-green-600 text-xl">
+              <span>RENT:</span>
+              <div className="flex items-center gap-0.5">
+                <PaidIcon /> <span> {rent}</span>
+              </div>
             </h2>
           </div>
+          {/* Agreement Button */}
+          <div>
+            {" "}
+            <button
+              disabled={agreement.length === 1}
+              onClick={() => {
+                user ? handleAgreement(apartment) : navigate("/login");
+              }}
+              className="btn btn-primary w-full text-lg text-white uppercase font-bold"
+            >
+              Agreement
+            </button>
+          </div>
         </div>
-        <button
-          disabled={agreement.length === 1}
-          onClick={() => {
-            user ? handleAgreement(apartment) : navigate("/login");
-          }}
-          className="btn btn-primary w-full text-base text-white uppercase"
-        >
-          Agreement
-        </button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import logo from "../assets/images/logo/urbanDwell.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import { useQuery } from "@tanstack/react-query";
 import LoginIcon from "@mui/icons-material/Login";
@@ -35,10 +35,10 @@ const Nav = () => {
   const NavBarLink = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/aparments">Apartments</Link>
+        <NavLink to="/aparments">Apartments</NavLink>
       </li>
     </>
   );

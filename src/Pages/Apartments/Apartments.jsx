@@ -1,5 +1,5 @@
 import axios from "axios";
-import AparmentsCard from "./AparmentsCard";
+import ApartmentCard from "./ApartmentCard";
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
@@ -66,7 +66,7 @@ const Apartments = () => {
       apartment_no: apartment.apartment_no,
       rent: apartment.rent,
     };
-    console.log(agreementData);
+    // console.log(agreementData);
     axiosSecure
       .post(`/agreement?email=${user.email}`, agreementData, {
         withCredentials: true,
@@ -108,7 +108,7 @@ const Apartments = () => {
       <div className="flex justify-center">
         <div className="grid mx-5 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {apartments.map((apartment) => (
-            <AparmentsCard
+            <ApartmentCard
               key={apartment._id}
               apartment={apartment}
               handleAgreement={handleAgreement}

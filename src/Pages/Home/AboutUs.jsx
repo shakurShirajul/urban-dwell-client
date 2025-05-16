@@ -3,7 +3,7 @@ import React from "react";
 const AboutUs = () => {
   return (
     <div>
-      <section className="py-12">
+      <section className="py-12 font-mulish">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl font-extrabold text-gray-800">

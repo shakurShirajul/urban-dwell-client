@@ -6,10 +6,12 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import { ToastContainer } from "react-toastify";
 import useAxiosSecure from "../../hooks/userAxiosSecure";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Apartments = () => {
   const { user, successToast } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 6;
@@ -45,15 +47,16 @@ const Apartments = () => {
   const { data: apartmentsLength = [] } = useQuery({
     queryKey: ["apartmentsLength"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/appartment/length?email=${user.email}`,
-        { withCredentials: true }
-      );
+      const res = await axiosPublic.get(`/appartment/length`, {
+        withCredentials: true,
+      });
       return res.data;
     },
   });
 
   const numberOfPages = Math.ceil(apartmentsLength.length / itemsPerPage);
+
+  console.log(`Number of pages ${numberOfPages}`);
 
   const pages = [...Array(numberOfPages).keys()];
 
@@ -105,6 +108,7 @@ const Apartments = () => {
       <Helmet>
         <title>Apartments || Urban Dwell</title>
       </Helmet>
+      {/* Apartments Card */}
       <div className="flex justify-center">
         <div className="grid mx-5 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {apartments.map((apartment) => (
@@ -117,13 +121,15 @@ const Apartments = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-center mt-10">
+      {/* Pagination */}
+      <div className="flex justify-center my-10">
         <div className="flex justify-center space-x-1 dark:text-gray-800">
           <button
             onClick={handlePrevPage}
             type="button"
             className="btn btn-square"
           >
+            {/* Backward Button */}
             <svg
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -152,6 +158,7 @@ const Apartments = () => {
             type="button"
             className="btn btn-square"
           >
+            {/* Forward Button */}
             <svg
               viewBox="0 0 24 24"
               stroke="currentColor"

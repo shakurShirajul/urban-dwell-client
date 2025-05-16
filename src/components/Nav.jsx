@@ -44,9 +44,9 @@ const Nav = () => {
   );
 
   return (
-    <div className="border-b font-roboto">
+    <div className="border-b z-50 font-roboto fixed w-full bg-white/90 backdrop-blur shadow-md">
       <div className="max-w-7xl mx-auto">
-        <div className="navbar">
+        <div className="navbar    ">
           <div className="navbar-start">
             <div className="dropdown">
               <div

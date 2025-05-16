@@ -104,22 +104,35 @@ const Apartments = () => {
   };
 
   return (
-    <div className="pt-28">
-      <Helmet>
-        <title>Apartments || Urban Dwell</title>
-      </Helmet>
-      {/* Apartments Card */}
-      <div className="flex justify-center">
-        <div className="grid mx-5 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {apartments.map((apartment) => (
-            <ApartmentCard
-              key={apartment._id}
-              apartment={apartment}
-              handleAgreement={handleAgreement}
-              agreement={agreement}
-            />
-          ))}
+    <div>
+      <div className="pt-28">
+        <Helmet>
+          <title>Apartments || Urban Dwell</title>
+        </Helmet>
+        {/* Apartments Card */}
+        <div className="flex justify-center">
+          <div className="grid mx-5 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {isLoading ? (
+              <div className="flex items-center justify-center col-span-full  min-h-screen">
+                <div className="flex items-center space-x-2">
+                  <div className="w-4 h-4 rounded-full animate-pulse bg-violet-600"></div>
+                  <div className="w-4 h-4 rounded-full animate-pulse bg-violet-600"></div>
+                  <div className="w-4 h-4 rounded-full animate-pulse bg-violet-600"></div>
+                </div>
+              </div>
+            ) : (
+              apartments.map((apartment) => (
+                <ApartmentCard
+                  key={apartment._id}
+                  apartment={apartment}
+                  handleAgreement={handleAgreement}
+                  agreement={agreement}
+                />
+              ))
+            )}
+          </div>
         </div>
+        <ToastContainer />
       </div>
       {/* Pagination */}
       <div className="flex justify-center my-10">
@@ -173,7 +186,6 @@ const Apartments = () => {
           </button>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

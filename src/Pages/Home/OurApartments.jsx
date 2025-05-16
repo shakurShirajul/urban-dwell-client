@@ -42,10 +42,6 @@ const OurApartments = () => {
     },
   });
 
-  if (isLoading) {
-    return <h1>Loading</h1>;
-  }
-
   return (
     <div>
       <div className="max-w-7xl mx-auto my-14">
@@ -54,14 +50,24 @@ const OurApartments = () => {
         </h2>
         <div className="flex justify-center">
           <div className="grid mx-5 md:mx-0 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {ourApartments.map((ourApartment) => (
-              <ApartmentCard
-                key={ourApartment._id}
-                apartment={ourApartment}
-                handleAgreement={handleAgreement}
-                agreement={ourApartment}
-              />
-            ))}
+            {isLoading ? (
+              <div className="flex items-center justify-center col-span-full">
+                <div className="flex items-center space-x-2">
+                  <div className="w-4 h-4 rounded-full animate-pulse bg-violet-600"></div>
+                  <div className="w-4 h-4 rounded-full animate-pulse bg-violet-600"></div>
+                  <div className="w-4 h-4 rounded-full animate-pulse bg-violet-600"></div>
+                </div>
+              </div>
+            ) : (
+              ourApartments.map((ourApartment) => (
+                <ApartmentCard
+                  key={ourApartment._id}
+                  apartment={ourApartment}
+                  handleAgreement={handleAgreement}
+                  agreement={agreement}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

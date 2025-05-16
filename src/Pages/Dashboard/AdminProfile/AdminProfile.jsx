@@ -34,7 +34,7 @@ const AdminProfile = () => {
 
   return (
     <div className="font-mulish">
-      <div className="pl-1 mb-5">
+      <div className="mb-5">
         <h1 className="text-3xl font-semibold">User Profile: </h1>
       </div>
       <div className="space-y-5">

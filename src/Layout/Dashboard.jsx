@@ -19,9 +19,9 @@ import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const activeButton =
-    "text-white bg-primary border-none rounded-lg font-semibold";
+    "text-white bg-primary border-none rounded-lg font-semibold duration-300";
+  const baseButton = "text-gray-600";
   const axiosSecure = useAxiosSecure();
-
   const { user } = useContext(AuthContext);
 
   const {
@@ -38,130 +38,156 @@ const Dashboard = () => {
     },
   });
 
+  console.log(role);
+
   const isRole = role.user_role;
 
   let sideBarNavigation;
 
   const adminSide = (
     <>
-      <li>
-        <NavLink
-          to="/dashboard/adminprofile"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <AdminPanelSettingsIcon />
-          Admin Profile
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/managemember"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <PersonIcon />
-          Manage Member
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/makeannouncement"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <CampaignIcon />
-          Make Announnement
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/agreementrequest"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <HandshakeIcon />
-          Agrement Request
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/managecoupons"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <ConfirmationNumberIcon />
-          Manage Coupons
-        </NavLink>
-      </li>
+      <NavLink
+        to="/dashboard/adminprofile"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <AdminPanelSettingsIcon />
+        Admin Profile
+      </NavLink>
+      <NavLink
+        to="/dashboard/managemember"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <PersonIcon />
+        Manage Member
+      </NavLink>
+      <NavLink
+        to="/dashboard/makeannouncement"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <CampaignIcon />
+        Make Announnement
+      </NavLink>
+      <NavLink
+        to="/dashboard/agreementrequest"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <HandshakeIcon />
+        Agrement Request
+      </NavLink>
+      <NavLink
+        to="/dashboard/managecoupons"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <ConfirmationNumberIcon />
+        Manage Coupons
+      </NavLink>
     </>
   );
 
   const memberSide = (
     <>
-      <li>
-        <NavLink
-          to="/dashboard/myprofile"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <AccountBoxIcon />
-          My Profile
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/makepayment"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <PaidIcon />
-          Make Payment
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/paymenthistory"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <ReceiptIcon />
-          Payment History
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/announcement"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <CampaignIcon />
-          Announcements
-        </NavLink>
-      </li>
+      <NavLink
+        to="/dashboard/myprofile"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <AccountBoxIcon />
+        My Profile
+      </NavLink>
+      <NavLink
+        to="/dashboard/makepayment"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <PaidIcon />
+        Make Payment
+      </NavLink>
+      <NavLink
+        to="/dashboard/paymenthistory"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <ReceiptIcon />
+        Payment History
+      </NavLink>
+      <NavLink
+        to="/dashboard/announcement"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <CampaignIcon />
+        Announcements
+      </NavLink>
     </>
   );
 
   const userSide = (
     <>
-      <li>
-        <NavLink
-          to="/dashboard/myprofile"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <AccountBoxIcon />
-          My Profile
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/announcement"
-          className={({ isActive }) => isActive && activeButton}
-        >
-          <CampaignIcon />
-          Announcements
-        </NavLink>
-      </li>
+      <NavLink
+        to="/dashboard/myprofile"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <AccountBoxIcon />
+        My Profile
+      </NavLink>
+      <NavLink
+        to="/dashboard/announcement"
+        className={({ isActive }) =>
+          `flex ju items-center gap-2 p-2 rounded-lg ${
+            isActive && activeButton
+          }`
+        }
+      >
+        <CampaignIcon />
+        Announcements
+      </NavLink>
     </>
   );
 
-  if (isRole === "admin") {
-    sideBarNavigation = adminSide;
-  } else if (isRole === "user") {
-    sideBarNavigation = userSide;
-  } else if (isRole === "member") {
-    sideBarNavigation = memberSide;
+  if (!isLoading) {
+    if (isRole === "admin") {
+      sideBarNavigation = adminSide;
+    } else if (isRole === "user") {
+      sideBarNavigation = userSide;
+    } else if (isRole === "member") {
+      sideBarNavigation = memberSide;
+    }
   }
 
   return (
@@ -204,12 +230,11 @@ const Dashboard = () => {
                   <ul className="menu p-4 w-80 h-screen bg-white text-base-content border-r">
                     {sideBarNavigation}
                     <div className="divider"></div>
-                    <li>
-                      <NavLink to="/">
-                        <HomeIcon />
-                        Home
-                      </NavLink>
-                    </li>
+
+                    <NavLink to="/">
+                      <HomeIcon />
+                      Home
+                    </NavLink>
                   </ul>
                 </div>
               </div>

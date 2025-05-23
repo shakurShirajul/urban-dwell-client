@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Banner = () => {
   return (
-    <div className="pt-20">
+    <div className="pt-16" id="banner">
       <Carousel autoPlay interval={2000} infiniteLoop>
         <div className="aspect-[16/6]">
           <img

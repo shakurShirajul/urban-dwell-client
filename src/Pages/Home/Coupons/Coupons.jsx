@@ -22,7 +22,7 @@ const Coupons = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto" id="coupon">
       <h2 className="text-4xl text-center font-extrabold text-gray-800">
         Get Exciting Coupon!
       </h2>

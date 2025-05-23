@@ -7,7 +7,7 @@ const position = [51.505, -0.09];
 
 const Location = () => {
   return (
-    <div className="font-roboto">
+    <div className="font-roboto" id="location">
       <div className="text-4xl font-extrabold text-gray-800 text-center">
         Apartment Location
       </div>

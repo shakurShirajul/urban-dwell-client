@@ -49,9 +49,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/adminprofile"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <AdminPanelSettingsIcon />
@@ -60,9 +58,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/managemember"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <PersonIcon />
@@ -71,9 +67,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/makeannouncement"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <CampaignIcon />
@@ -82,9 +76,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/agreementrequest"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <HandshakeIcon />
@@ -93,9 +85,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/managecoupons"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <ConfirmationNumberIcon />
@@ -109,9 +99,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/myprofile"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <AccountBoxIcon />
@@ -120,9 +108,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/makepayment"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <PaidIcon />
@@ -131,9 +117,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/paymenthistory"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <ReceiptIcon />
@@ -142,9 +126,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/announcement"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <CampaignIcon />
@@ -158,9 +140,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/myprofile"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <AccountBoxIcon />
@@ -169,9 +149,7 @@ const Dashboard = () => {
       <NavLink
         to="/dashboard/announcement"
         className={({ isActive }) =>
-          `flex ju items-center gap-2 p-2 rounded-lg ${
-            isActive && activeButton
-          }`
+          `flex items-center gap-2 p-2 rounded-lg ${isActive && activeButton}`
         }
       >
         <CampaignIcon />
@@ -193,7 +171,7 @@ const Dashboard = () => {
   return (
     <div>
       {isLoading ? (
-        <div className="flex h-screen items-center justify-center space-x-2">
+        <div className="flex h-screen items-centerstify-center space-x-2">
           <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
           <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
           <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>

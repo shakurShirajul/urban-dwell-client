@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ApartmentCard from "../Apartments/ApartmentCard";
 import useAxiosSecure from "../../hooks/userAxiosSecure";
+import { Link } from "react-router-dom";
 
 const OurApartments = () => {
   const axiosSecure = useAxiosSecure();
@@ -43,7 +44,7 @@ const OurApartments = () => {
   });
 
   return (
-    <div>
+    <div id="ourApartments">
       <div className="max-w-7xl mx-auto my-14">
         <h2 className="text-4xl font-extrabold text-gray-800 font-mulish text-center my-10">
           Our Apartments
@@ -59,14 +60,23 @@ const OurApartments = () => {
                 </div>
               </div>
             ) : (
-              ourApartments.map((ourApartment) => (
-                <ApartmentCard
-                  key={ourApartment._id}
-                  apartment={ourApartment}
-                  handleAgreement={handleAgreement}
-                  agreement={agreement}
-                />
-              ))
+              <>
+                {ourApartments.map((ourApartment) => (
+                  <ApartmentCard
+                    key={ourApartment._id}
+                    apartment={ourApartment}
+                    handleAgreement={handleAgreement}
+                    agreement={agreement}
+                  />
+                ))}
+                <div className="col-span-full flex justify-center">
+                  <Link to="/aparments">
+                    <button className="btn btn-primary text-lg text-white uppercase font-bold">
+                      VIEW MORE
+                    </button>
+                  </Link>
+                </div>
+              </>
             )}
           </div>
         </div>

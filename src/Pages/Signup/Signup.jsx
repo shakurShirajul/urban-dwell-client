@@ -21,7 +21,6 @@ const Signup = () => {
               <p className="text-center sm:px-6  mt-2">
                 Already Have An Account?
                 <Link to="/login" className="underline ">
-                  {" "}
                   Login
                 </Link>
               </p>

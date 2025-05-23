@@ -45,7 +45,7 @@ const LoginForm = ({ navigateToPage }) => {
               className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600 shadow-sm"
             />
           </div>
-          <button className="block w-full p-3 text-center rounded-md  bg-primary">
+          <button className="block w-full p-3 text-center rounded-md text-base-content bg-primary">
             Sign in
           </button>
         </form>

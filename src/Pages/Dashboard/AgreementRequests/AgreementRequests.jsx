@@ -60,9 +60,9 @@ const AgreementRequests = () => {
         <div className="font-mulish">
           <p className="text-4xl font-extrabold mb-5">Agreement Request</p>
 
-          <div className="overflow-x-auto bg-gray-100 rounded-md shadow-md border border-gray-100">
+          <div className="overflow-x-auto rounded-md shadow-md border border-gray-100">
             <table className="table">
-              <thead className="text-lg text-black font-bold">
+              <thead className="text-lg dark:text-gray-400 font-bold">
                 <tr>
                   <th>User Name</th>
                   <th>User Email</th>

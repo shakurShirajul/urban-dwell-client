@@ -61,23 +61,21 @@ const Login = () => {
             <h1 className="text-4xl font-bold text-left">Welcome Back</h1>
             <LoginForm navigateToPage={navigateToPage} />
             <div className="flex items-center justify-center pt-4 space-x-1">
-              <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-              <p className="px-3 text-sm dark:text-gray-600">
-                Login With Social Accounts
-              </p>
-              <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
+              <div className="flex-1 h-px sm:w-16"></div>
+              <p className="px-3 text-sm">Login With Social Accounts</p>
+              <div className="flex-1 h-px sm:w-16"></div>
             </div>
             <button
               onClick={handleGoogleSignIn}
               type="button"
-              className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600"
+              className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 focus:dark:ring-violet-600"
             >
               <FcGoogle className="w-5 h-5" />
               <p>Login with Google</p>
             </button>
-            <p className="text-center sm:px-6 dark:text-gray-600">
+            <p className="text-center sm:px-6">
               Don't have an account?
-              <Link to="/signup" className="underline dark:text-gray-800">
+              <Link to="/signup" className="underline">
                 Sign up
               </Link>
             </p>

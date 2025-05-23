@@ -5,7 +5,9 @@ const Footer = () => {
       <footer className="footer p-10 bg-base-200 text-base-content">
         <aside className="flex justify-center flex-col items-center gap-0">
           <img src={logo} className="w-12 h-12" alt="" />
-          <p className="text-xl font-extrabold text-gray-800">Urban Dwell</p>
+          <p className="text-xl font-extrabold text-gray-800 dark:text-gray-400">
+            Urban Dwell
+          </p>
         </aside>
         <nav>
           <h6 className="text-lg font-bold">Services</h6>

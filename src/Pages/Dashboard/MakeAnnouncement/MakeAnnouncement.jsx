@@ -32,7 +32,9 @@ const MakeAnnouncement = () => {
   return (
     <div>
       <div className="font-mulish space-y-5 ">
-        <p className="text-4xl font-extrabold">Make An Announcement</p>
+        <p className="text-4xl font-extrabold dark:text-gray-400">
+          Make An Announcement
+        </p>
         <MakeAnnouncementForm handleAnnounce={handleAnnounce} />
       </div>
       <ToastContainer />

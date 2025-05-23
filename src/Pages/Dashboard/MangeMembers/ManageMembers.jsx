@@ -44,7 +44,7 @@ const ManageMembers = () => {
         </div>
       ) : (
         <div className="space-y-5">
-          <p className="text-4xl font-extrabold text-gray-800">
+          <p className="text-4xl font-extrabold dark:text-gray-400">
             Members Of Urban Dwell
           </p>
           <ManageMembersTable

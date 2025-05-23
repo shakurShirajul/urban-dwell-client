@@ -52,8 +52,6 @@ const ManageCoupons = () => {
     });
   };
 
-  console.log(couponCodes);
-
   return (
     <div>
       {isLoading ? (
@@ -85,7 +83,7 @@ const ManageCoupons = () => {
                       <input
                         type="text"
                         name="couponCode"
-                        className="w-full text-black rounded-lg py-1 pl-2 border"
+                        className="w-full dark:text-gray-400 rounded-lg py-1 pl-2 border"
                       />
                     </div>
                     <div className="space-y-1 flex-1">
@@ -93,7 +91,7 @@ const ManageCoupons = () => {
                       <input
                         type="number"
                         name="couponDiscount"
-                        className="w-full text-black rounded-lg py-1 px-2 border"
+                        className="w-full dark:text-gray-400 rounded-lg py-1 px-2 border"
                       />
                     </div>
                   </div>
@@ -102,7 +100,7 @@ const ManageCoupons = () => {
                     <input
                       type="text"
                       name="couponDescription"
-                      className="w-full text-black rounded-lg py-1 pl-2.5 border"
+                      className="w-full dark:text-gray-400 rounded-lg py-1 pl-2.5 border"
                     />
                   </div>
                 </div>
@@ -126,10 +124,10 @@ const ManageCoupons = () => {
               </form>
             </dialog>
 
-            <div className="overflow-x-auto bg-gray-100 text-gray-800 rounded-md shadow-md">
+            <div className="overflow-x-auto rounded-md shadow-md">
               <table className="table ">
                 {/* head */}
-                <thead className="text-base font-semibold">
+                <thead className="text-base font-semibold dark:text-gray-400">
                   <tr>
                     <th>SN</th>
                     <th>Coupon Code</th>

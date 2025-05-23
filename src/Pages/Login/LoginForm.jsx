@@ -26,7 +26,7 @@ const LoginForm = ({ navigateToPage }) => {
       <div>
         <form className="space-y-3" onSubmit={handleFormSubmit}>
           <div className="space-y-1 text-base mt-5">
-            <label className="block text-lg text-black">Email: </label>
+            <label className="block text-lg">Email:</label>
             <input
               type="email"
               name="email"
@@ -35,7 +35,7 @@ const LoginForm = ({ navigateToPage }) => {
             />
           </div>
           <div className="space-y-1 text-base">
-            <label htmlFor="password" className="block text-lg text-black">
+            <label htmlFor="password" className="block text-lg">
               Password:
             </label>
             <input
@@ -45,7 +45,7 @@ const LoginForm = ({ navigateToPage }) => {
               className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600 shadow-sm"
             />
           </div>
-          <button className="block w-full p-3 text-center rounded-md dark:text-gray-50 bg-primary">
+          <button className="block w-full p-3 text-center rounded-md  bg-primary">
             Sign in
           </button>
         </form>

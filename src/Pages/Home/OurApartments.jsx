@@ -46,7 +46,7 @@ const OurApartments = () => {
   return (
     <div id="ourApartments">
       <div className="max-w-7xl mx-auto my-14">
-        <h2 className="text-4xl font-extrabold text-gray-800 font-mulish text-center my-10">
+        <h2 className="text-4xl font-extrabold font-mulish text-center my-10">
           Our Apartments
         </h2>
         <div className="flex justify-center">

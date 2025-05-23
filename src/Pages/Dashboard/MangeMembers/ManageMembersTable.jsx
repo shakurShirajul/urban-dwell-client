@@ -5,12 +5,12 @@ import useAxiosSecure from "../../../hooks/userAxiosSecure";
 
 const ManageMembersTable = ({ members, handleRemoveButton }) => {
   return (
-    <div className="font-mulish rounded-md border-gray-200 shadow-md bg-gray-100 text-gray-800">
+    <div className="font-mulish rounded-md border-gray-200 shadow-md dark:text-gray-400">
       <div className="overflow-x-auto">
         <table className="table ">
           {/* head */}
           <thead className="text-base">
-            <tr>
+            <tr className="dark:text-gray-400">
               <th>Photo</th>
               <th>Name</th>
               <th>Email</th>

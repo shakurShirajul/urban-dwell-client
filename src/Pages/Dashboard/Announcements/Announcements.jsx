@@ -35,9 +35,7 @@ const Announcements = () => {
         </div>
       ) : (
         <div className="font-mulish">
-          <h1 className="text-4xl font-extrabold text-gray-800 mb-5">
-            Announcements
-          </h1>
+          <h1 className="text-4xl font-extrabold mb-5">Announcements</h1>
           <div className="space-y-2">
             {announcements.map((announcement) => (
               <AnnouncementsCard announcement={announcement} />

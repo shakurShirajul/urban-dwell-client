@@ -106,13 +106,11 @@ const MyProfile = () => {
         </div>
       ) : (
         <div className="font-mulish">
-          <h1 className="text-4xl font-extrabold text-gray-800 mb-5">
-            My Profile
-          </h1>
+          <h1 className="text-4xl font-extrabold mb-5">My Profile</h1>
           <div>
             <div className="space-y-2">
               <h1 className="text-2xl font-bold">Personal Details: </h1>
-              <div className="rounded-xl shadow-md border border-gray-200 px-3 py-2 dark:bg-gray-100">
+              <div className="rounded-xl shadow-md border px-3 py-2">
                 <div className="flex flex-col lg:flex-row gap-6 rounded-xl ">
                   {/* Profile Image */}
                   <div>

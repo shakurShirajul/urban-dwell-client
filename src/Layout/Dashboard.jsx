@@ -205,11 +205,14 @@ const Dashboard = () => {
                     className="drawer-overlay"
                   ></label>
 
-                  <ul className="menu p-4 w-80 h-screen bg-white text-base-content border-r">
+                  <ul className="menu p-4 w-80 h-screen  text-base-content border-r">
                     {sideBarNavigation}
                     <div className="divider"></div>
 
-                    <NavLink to="/">
+                    <NavLink
+                      to="/"
+                      className="flex items-center gap-2 p-2 rounded-lg"
+                    >
                       <HomeIcon />
                       Home
                     </NavLink>

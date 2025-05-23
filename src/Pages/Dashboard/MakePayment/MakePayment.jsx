@@ -48,14 +48,12 @@ const MakePayment = () => {
       ) : (
         <div>
           <section className="font-mulish">
-            <h1 className="text-4xl font-extrabold text-gray-800 mb-5">
-              Make Payment:
-            </h1>
+            <h1 className="text-4xl font-extrabold mb-5">Make Payment:</h1>
             <form
               onSubmit={handleMakePaymentForm}
               className="container flex flex-col mx-auto space-y-12"
             >
-              <fieldset className="p-6 rounded-xl border border-gray-50 shadow-md bg-gray-100">
+              <fieldset className="p-6 rounded-xl border border-gray-50 shadow-md">
                 <div className="space-y-5 font-roboto">
                   <div className="flex flex-col lg:flex-row gap-5">
                     <div className="flex-1 space-y-2">
@@ -64,7 +62,7 @@ const MakePayment = () => {
                         type="text"
                         disabled
                         value={user_name}
-                        className="w-full text-black rounded-lg py-2.5 pl-2 border"
+                        className="w-full rounded-lg py-2.5 pl-2 border"
                       />
                     </div>
                     <div className="flex-1 space-y-2">
@@ -73,7 +71,7 @@ const MakePayment = () => {
                         type="email"
                         disabled
                         value={user_email}
-                        className="w-full text-black rounded-lg py-2.5 pl-2 border"
+                        className="w-full rounded-lg py-2.5 pl-2 border"
                       />
                     </div>
                   </div>
@@ -84,7 +82,7 @@ const MakePayment = () => {
                         type="text"
                         disabled
                         value={block_name}
-                        className="w-full text-black rounded-lg py-2.5 pl-2 border"
+                        className="w-full rounded-lg py-2.5 pl-2 border"
                       />
                     </div>
                     <div className="flex-1 space-y-2">
@@ -93,7 +91,7 @@ const MakePayment = () => {
                         disabled
                         value={floor_no}
                         type="text"
-                        className="w-full text-black rounded-lg py-2.5 pl-2 border"
+                        className="w-full rounded-lg py-2.5 pl-2 border"
                       />
                     </div>
                     <div className="flex-1 space-y-2">
@@ -102,7 +100,7 @@ const MakePayment = () => {
                         type="text"
                         disabled
                         value={apartment_no}
-                        className="w-full text-black rounded-lg py-2.5 pl-2 border"
+                        className="w-full rounded-lg py-2.5 pl-2 border"
                       />
                     </div>
                     <div className="flex-1 space-y-2">
@@ -111,7 +109,7 @@ const MakePayment = () => {
                         type="text"
                         disabled
                         value={`$${rent}`}
-                        className="w-full text-black rounded-lg py-2.5 pl-2 border"
+                        className="w-full rounded-lg py-2.5 pl-2 border"
                       />
                     </div>
                     <div className="flex-1 space-y-2">

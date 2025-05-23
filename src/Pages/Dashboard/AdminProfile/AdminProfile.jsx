@@ -49,7 +49,7 @@ const AdminProfile = () => {
             {/* Personal Details */}
             <div className="space-y-2">
               <h1 className="text-2xl font-bold">Personal Details: </h1>
-              <div className="rounded-xl shadow-md border border-gray-200 px-3 py-2 dark:bg-gray-50">
+              <div className="rounded-xl shadow-md border border-gray-200 px-3 py-2 ">
                 <div className="flex flex-col lg:flex-row gap-6 rounded-xl ">
                   {/* Profile Image */}
                   <div>
@@ -73,11 +73,11 @@ const AdminProfile = () => {
             <div className="space-y-2">
               <h1 className="text-2xl font-bold">Details: </h1>
               {/* Dashboard Detials */}
-              <div className="max-w-7xl mx-auto rounded-xl border border-gray-200 shadow-md px-3 py-2 dark:text-gray-800 bg-gray-100">
+              <div className="max-w-7xl mx-auto rounded-xl border border-gray-200 shadow-md px-3 py-2">
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <tbody>
-                      <tr className="text-right border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-100">
+                      <tr className="text-right border-b border-opacity-20">
                         <td className="px-3 py-2 text-left">
                           <span>1</span>
                         </td>
@@ -88,7 +88,7 @@ const AdminProfile = () => {
                           <span> {stats.totalApartments}</span>
                         </td>
                       </tr>
-                      <tr className="text-right border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-100">
+                      <tr className="text-right border-b border-opacity-20">
                         <td className="px-3 py-2 text-left">
                           <span>2</span>
                         </td>
@@ -99,7 +99,7 @@ const AdminProfile = () => {
                           <span> {stats.totalUsers}</span>
                         </td>
                       </tr>
-                      <tr className="text-right border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-100">
+                      <tr className="text-right border-b border-opacity-20">
                         <td className="px-3 py-2 text-left">
                           <span>2</span>
                         </td>
@@ -110,7 +110,7 @@ const AdminProfile = () => {
                           <span> {stats.totalMembers}</span>
                         </td>
                       </tr>
-                      <tr className="text-right border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-100">
+                      <tr className="text-right border-b border-opacity-20">
                         <td className="px-3 py-2 text-left">
                           <span>3</span>
                         </td>

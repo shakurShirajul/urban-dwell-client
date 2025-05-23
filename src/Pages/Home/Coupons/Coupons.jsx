@@ -23,7 +23,7 @@ const Coupons = () => {
 
   return (
     <div className="max-w-7xl mx-auto" id="coupon">
-      <h2 className="text-4xl text-center font-extrabold text-gray-800">
+      <h2 className="text-4xl text-center font-extrabold">
         Get Exciting Coupon!
       </h2>
       <Swiper
@@ -39,12 +39,12 @@ const Coupons = () => {
         <div className="grid">
           {coponsDisplays.map((couponsDisplay) => (
             <SwiperSlide>
-              <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-10 border">
+              <div className="max-w-sm mx-auto shadow-lg rounded-lg overflow-hidden my-10 border">
                 <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2 text-center text-gray-800">
+                  <div className="font-bold text-xl mb-2 text-center">
                     Get Coupon!
                   </div>
-                  <p className="text-gray-700 text-lg font-semibold text-center">
+                  <p className="text-lg font-semibold text-center">
                     {couponsDisplay.coupon_Description}
                   </p>
                   <p className="text-3xl text-indigo-600 text-center mt-2 font-bold">

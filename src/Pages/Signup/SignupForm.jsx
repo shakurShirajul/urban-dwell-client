@@ -100,7 +100,9 @@ const SignupForm = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           <div className="space-y-1 text-base mt-5">
-            <label className="block text-lg text-black">Name:</label>
+            <label className="block text-lg text-black dark:text-gray-400">
+              Name:
+            </label>
             <input
               type="text"
               placeholder="Shirajul Islam"
@@ -110,7 +112,9 @@ const SignupForm = () => {
             />
           </div>
           <div className="space-y-1 text-base">
-            <label className="block text-lg text-black">Email:</label>
+            <label className="block text-lg text-black dark:text-gray-400">
+              Email:
+            </label>
             <input
               type="email"
               placeholder="example@gmail.com"
@@ -120,7 +124,9 @@ const SignupForm = () => {
             />
           </div>
           <div className="form-control w-full my-6">
-            <label className="block text-lg text-black">Profile Photo:</label>
+            <label className="block text-lg text-black dark:text-gray-400">
+              Profile Photo:
+            </label>
             <input
               {...register("image", { required: true })}
               type="file"
@@ -129,7 +135,9 @@ const SignupForm = () => {
             />
           </div>
           <div className="space-y-1 text-base mb-5">
-            <label className="block text-lg text-black">Password:</label>
+            <label className="block text-lg text-black dark:text-gray-400">
+              Password:
+            </label>
             <input
               type="password"
               placeholder="Password"
@@ -138,7 +146,7 @@ const SignupForm = () => {
               className="w-full px-4 py-3 rounded-md border dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             />
           </div>
-          <button className="block w-full p-3 text-center rounded-md font-semibold text-lg dark:text-gray-50 bg-primary">
+          <button className="block w-full p-3 text-center rounded-md font-semibold text-lg dark:text-gray-50 bg-primary ">
             Sign Up
           </button>
         </form>

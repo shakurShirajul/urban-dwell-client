@@ -8,13 +8,13 @@ const AnnouncementsCard = ({ announcement }) => {
   const year = currentDate.getFullYear();
 
   return (
-    <div className="w-full border rounded-lg bg-gray-100 shadow-md p-5">
+    <div className="w-full border rounded-lg shadow-md p-5">
       <div>
         <div className="space-y-1">
           <h1 className="text-xl font-semibold">
             {announcement.announce_title}
           </h1>
-          <h7 className="text-sm font-semibold text-gray-400">
+          <h7 className="text-sm font-semibold">
             Date: {`${date}-${month}-${year}`}
           </h7>
         </div>

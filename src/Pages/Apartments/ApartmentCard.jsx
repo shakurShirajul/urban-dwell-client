@@ -26,9 +26,9 @@ const AparmentsCard = ({ apartment, handleAgreement, agreement }) => {
           {/* Floor Block Apartment No */}
           <div className="">
             <div className="flex items-center justify-between">
-              <h2 className="flex items-center gap-0.5 text-sm">
+              <h2 className="flex items-center gap-0.5 text-sm ">
                 <MeetingRoomIcon fontSize="small" />
-                <span className="font-bold">Floor: </span>
+                <span className="font-bold ">Floor: </span>
                 {floor_no}
               </h2>
               <h2 className="flex items-center gap-0.5 text-sm">

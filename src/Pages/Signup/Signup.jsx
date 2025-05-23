@@ -12,7 +12,7 @@ const Signup = () => {
         <div className="max-w-md">
           <div className="space-y-5 ">
             <div className="p-10 border rounded-xl">
-              <h1 className="text-4xl font-bold text-left uppercase text-black">
+              <h1 className="text-4xl font-bold text-left uppercase text-black dark:text-gray-400">
                 Get Started with <br />{" "}
                 <span className="text-[#274c07]">Urban</span>{" "}
                 <span className="text-[#1a3842]">Dwell</span>

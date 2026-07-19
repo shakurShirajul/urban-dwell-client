@@ -1,60 +1,21 @@
 import { useContext } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import ApartmentCard from "@/features/apartments/apartment-card";
 import { AuthContext } from "@/shared/contexts/auth-context";
-import { publicApi } from "@/shared/api/http-clients";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { EmptyState, LoadingState } from "@/shared/components/ui/feedback";
+import { useApartmentAgreement, useApartments } from "@/features/apartments/hooks/use-apartment-queries";
+import useApartmentRequest from "@/features/apartments/hooks/use-apartment-request";
 
 const OurApartments = () => {
-  const { user, successToast, errorToast } = useContext(AuthContext);
-  const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const { user } = useContext(AuthContext);
 
-  const { data: agreement = [] } = useQuery({
-    queryKey: ["agreement", user?.email],
-    enabled: Boolean(user?.email),
-    queryFn: async () => {
-      const response = await axiosSecure.get(`/agreement?email=${user.email}`);
-      return response.data;
-    },
-  });
-
-  const { data: apartments = [], isLoading } = useQuery({
-    queryKey: ["featuredApartments"],
-    queryFn: async () => {
-      const response = await publicApi.get("/apartments?page=0&limit=3");
-      return response.data;
-    },
-  });
-
-  const handleAgreement = async (apartment) => {
-    if (!user) {
-      navigate("/login", { state: { from: { pathname: "/apartments" } } });
-      return;
-    }
-
-    try {
-      await axiosSecure.post(`/agreement?email=${user.email}`, {
-        user_name: user.displayName,
-        user_email: user.email,
-        floor_no: apartment.floor_no,
-        block_name: apartment.block_name,
-        apartment_no: apartment.apartment_no,
-        rent: apartment.rent,
-      });
-      await queryClient.invalidateQueries({ queryKey: ["agreement", user.email] });
-      successToast("Apartment request submitted");
-    } catch {
-      errorToast("The request could not be submitted. Try again.");
-    }
-  };
+  const { data: agreement = [] } = useApartmentAgreement(user?.email);
+  const { data: apartments = [], isLoading } = useApartments({ page: 0, limit: 3 });
+  const { requestApartment } = useApartmentRequest();
 
   return (
-    <section id="apartments" className="section-space bg-base-200">
+    <section id="apartments" className="section-space scroll-mt-20 bg-base-200">
       <div className="app-shell">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
@@ -74,7 +35,7 @@ const OurApartments = () => {
               <ApartmentCard
                 key={apartment._id}
                 apartment={apartment}
-                handleAgreement={handleAgreement}
+                handleAgreement={requestApartment}
                 agreement={agreement}
               />
             )) : (

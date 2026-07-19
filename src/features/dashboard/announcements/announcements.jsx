@@ -1,17 +1,12 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 import AnnouncementsCard from "./announcements-card";
 import { AuthContext } from "@/shared/contexts/auth-context";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { EmptyState, LoadingState, PageHeading } from "@/shared/components/ui/feedback";
+import useAnnouncements from "./hooks/use-announcements";
 
 const Announcements = () => {
   const { user } = useContext(AuthContext);
-  const axiosSecure = useAxiosSecure();
-  const { data: announcements = [], isLoading, isError } = useQuery({
-    queryKey: ["announcements", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/announcements?email=${user.email}`)).data,
-  });
+  const { data: announcements = [], isLoading, isError } = useAnnouncements(user?.email);
 
   if (isLoading) return <LoadingState label="Loading announcements…" />;
 

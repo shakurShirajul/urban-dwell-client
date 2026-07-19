@@ -1,5 +1,6 @@
 import { HiOutlineArrowUpRight, HiOutlineBuildingOffice, HiOutlineSquares2X2 } from "react-icons/hi2";
 import PropTypes from "prop-types";
+import { memo } from "react";
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -75,4 +76,4 @@ ApartmentCard.propTypes = {
   agreement: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default ApartmentCard;
+export default memo(ApartmentCard);

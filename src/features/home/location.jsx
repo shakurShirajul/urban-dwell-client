@@ -2,7 +2,7 @@ import { HiOutlineArrowUpRight, HiOutlineMap, HiOutlineMapPin } from "react-icon
 import Map from "./map";
 
 const Location = () => (
-  <section id="visit" className="section-space bg-base-100">
+  <section id="visit" className="section-space scroll-mt-20 bg-base-100">
     <div className="app-shell">
       <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch">
         <div className="flex flex-col justify-between rounded-[2rem] bg-accent p-8 text-accent-content sm:p-10">
@@ -31,7 +31,7 @@ const Location = () => (
             </a>
           </div>
         </div>
-        <div className="min-h-[32rem] overflow-hidden rounded-[2rem] border border-base-content/10" aria-label="Map showing Urban Dwell at 350 Fifth Avenue">
+        <div className="relative z-0 min-h-[32rem] isolate overflow-hidden rounded-[2rem] border border-base-content/10" aria-label="Map showing Urban Dwell at 350 Fifth Avenue">
           <Map />
         </div>
       </div>

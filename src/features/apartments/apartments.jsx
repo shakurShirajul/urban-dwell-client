@@ -1,76 +1,30 @@
 import { useContext } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 import ApartmentCard from "./apartment-card";
 import { AuthContext } from "@/shared/contexts/auth-context";
-import { publicApi } from "@/shared/api/http-clients";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { EmptyState, LoadingState } from "@/shared/components/ui/feedback";
+import { useApartmentAgreement, useApartmentCount, useApartments } from "./hooks/use-apartment-queries";
+import useApartmentRequest from "./hooks/use-apartment-request";
 
 const Apartments = () => {
-  const { user, successToast, errorToast } = useContext(AuthContext);
-  const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const { user } = useContext(AuthContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedPage = Number(searchParams.get("page") || 1);
   const currentPage = Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage - 1 : 0;
   const itemsPerPage = 6;
 
-  const { data: agreement = [] } = useQuery({
-    queryKey: ["agreement", user?.email],
-    enabled: Boolean(user?.email),
-    queryFn: async () => {
-      const response = await axiosSecure.get(`/agreement?email=${user.email}`);
-      return response.data;
-    },
-  });
-
-  const { data: apartments = [], isLoading, isError } = useQuery({
-    queryKey: ["apartments", currentPage, itemsPerPage],
-    queryFn: async () => {
-      const response = await publicApi.get(`/apartments?page=${currentPage}&limit=${itemsPerPage}`);
-      return response.data;
-    },
-  });
-
-  const { data: apartmentsLength = { length: 0 } } = useQuery({
-    queryKey: ["apartmentsLength"],
-    queryFn: async () => {
-      const response = await publicApi.get("/appartment/length");
-      return response.data;
-    },
-  });
+  const { data: agreement = [] } = useApartmentAgreement(user?.email);
+  const { data: apartments = [], isLoading, isError, isFetching } = useApartments({ page: currentPage, limit: itemsPerPage, preservePrevious: true });
+  const { data: apartmentsLength = { length: 0 } } = useApartmentCount();
+  const { requestApartment } = useApartmentRequest();
 
   const pageCount = Math.max(1, Math.ceil((apartmentsLength.length || 0) / itemsPerPage));
 
   const changePage = (page) => {
     setSearchParams({ page: String(page + 1) });
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleAgreement = async (apartment) => {
-    if (!user) {
-      navigate("/login", { state: { from: { pathname: "/apartments" } } });
-      return;
-    }
-
-    try {
-      await axiosSecure.post(`/agreement?email=${user.email}`, {
-        user_name: user.displayName,
-        user_email: user.email,
-        floor_no: apartment.floor_no,
-        block_name: apartment.block_name,
-        apartment_no: apartment.apartment_no,
-        rent: apartment.rent,
-      });
-      await queryClient.invalidateQueries({ queryKey: ["agreement", user.email] });
-      successToast("Apartment request submitted");
-    } catch {
-      errorToast("The request could not be submitted. Try again.");
-    }
   };
 
   return (
@@ -99,12 +53,12 @@ const Apartments = () => {
         ) : isError ? (
           <EmptyState title="Apartments could not be loaded" description="Check your connection and refresh the page to try again." />
         ) : (
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy={isFetching}>
             {apartments.length ? apartments.map((apartment) => (
               <ApartmentCard
                 key={apartment._id}
                 apartment={apartment}
-                handleAgreement={handleAgreement}
+                handleAgreement={requestApartment}
                 agreement={agreement}
               />
             )) : (

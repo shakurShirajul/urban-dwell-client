@@ -1,17 +1,14 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 import ManageMembersTable from "./manage-members-table";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { EmptyState, LoadingState, PageHeading } from "@/shared/components/ui/feedback";
+import useMembers from "./hooks/use-members";
 
 const ManageMembers = () => {
   const axiosSecure = useAxiosSecure();
   const { user, successToast, errorToast } = useContext(AuthContext);
-  const { data: members = [], isLoading, refetch } = useQuery({
-    queryKey: ["members", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/users/members?email=${user.email}`)).data,
-  });
+  const { data: members = [], isLoading, refetch } = useMembers(user?.email);
 
   const removeMember = async (member) => {
     if (!window.confirm(`Remove ${member.user_name} as a member? Their resident access will change immediately.`)) return;

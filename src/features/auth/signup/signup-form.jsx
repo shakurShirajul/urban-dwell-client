@@ -69,7 +69,7 @@ const SignupForm = () => {
 
       {submitError ? <p className="rounded-xl bg-error/10 px-4 py-3 text-sm font-medium text-error" role="alert">{submitError}</p> : null}
 
-      <button type="submit" disabled={isSubmitting} className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 font-bold text-primary-content transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60">
+      <button type="submit" disabled={isSubmitting} className="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 font-bold text-primary-content transition-colors hover:bg-secondary disabled:cursor-wait disabled:opacity-60">
         {isSubmitting ? "Creating your account…" : "Create resident account"}
         {!isSubmitting ? <HiOutlineArrowRight aria-hidden="true" /> : null}
       </button>

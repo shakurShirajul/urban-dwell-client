@@ -1,22 +1,13 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { HiOutlineBuildingOffice2, HiOutlineHomeModern, HiOutlineUserGroup, HiOutlineUsers } from "react-icons/hi2";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import { LoadingState, PageHeading } from "@/shared/components/ui/feedback";
+import { useAdminProfile, useAdminStats } from "./hooks/use-admin-overview";
 
 const AdminProfile = () => {
-  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-
-  const { data: adminData, isLoading: profileLoading } = useQuery({
-    queryKey: ["adminProfile", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/admin/info?email=${user.email}`)).data,
-  });
-  const { data: stats, isLoading: statsLoading } = useQuery({
-    queryKey: ["adminStats", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/admin/stats?email=${user.email}`)).data,
-  });
+  const { data: adminData, isLoading: profileLoading } = useAdminProfile(user?.email);
+  const { data: stats, isLoading: statsLoading } = useAdminStats(user?.email);
 
   if (profileLoading || statsLoading) return <LoadingState label="Loading building overview…" />;
 

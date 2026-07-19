@@ -24,7 +24,7 @@ const features = [
 ];
 
 const AboutUs = () => (
-  <section id="building" className="section-space bg-base-100">
+  <section id="building" className="section-space scroll-mt-20 bg-base-100">
     <div className="app-shell">
       <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>

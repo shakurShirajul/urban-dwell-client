@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { HiOutlineCheck, HiOutlineTicket } from "react-icons/hi2";
-import { publicApi } from "@/shared/api/http-clients";
 import { EmptyState, LoadingState } from "@/shared/components/ui/feedback";
+import useCoupons from "@/features/coupons/hooks/use-coupons";
 
 const Coupons = () => {
   const [copiedCode, setCopiedCode] = useState("");
 
-  const { data: coupons = [], isLoading } = useQuery({
-    queryKey: ["couponDisplays"],
-    queryFn: async () => {
-      const response = await publicApi.get("/coupon-code");
-      return response.data;
-    },
-  });
+  const { data: coupons = [], isLoading } = useCoupons();
 
   const copyCoupon = async (code) => {
     await navigator.clipboard.writeText(code);
@@ -22,7 +15,7 @@ const Coupons = () => {
   };
 
   return (
-    <section id="offers" className="section-space overflow-hidden bg-secondary text-secondary-content">
+    <section id="offers" className="section-space scroll-mt-20 overflow-hidden bg-secondary text-secondary-content">
       <div className="app-shell">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>

@@ -63,7 +63,7 @@ const LoginForm = ({ navigateToPage }) => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 font-bold text-primary-content transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60"
+        className="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 font-bold text-primary-content transition-colors hover:bg-secondary disabled:cursor-wait disabled:opacity-60"
       >
         {isSubmitting ? "Signing in…" : "Sign in to your dashboard"}
         {!isSubmitting ? <HiOutlineArrowRight aria-hidden="true" /> : null}

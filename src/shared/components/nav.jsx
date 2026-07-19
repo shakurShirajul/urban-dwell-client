@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import {
   HiOutlineArrowRightOnRectangle,
   HiOutlineBars3,
@@ -11,7 +10,7 @@ import {
 } from "react-icons/hi2";
 import logo from "@/assets/images/logo/urban-dwell.png";
 import { AuthContext } from "@/shared/contexts/auth-context";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
+import useUserRole from "@/shared/hooks/use-user-role";
 
 const navigation = [
   { label: "Apartments", hash: "apartments" },
@@ -23,7 +22,6 @@ const navigation = [
 const Nav = () => {
   const { user, logOut } = useContext(AuthContext);
   const location = useLocation();
-  const axiosSecure = useAxiosSecure();
   const profileRef = useRef(null);
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,14 +48,7 @@ const Nav = () => {
     return () => document.removeEventListener("pointerdown", closeProfile);
   }, []);
 
-  const { data: userRole } = useQuery({
-    queryKey: ["role", user?.email],
-    enabled: Boolean(user?.email),
-    queryFn: async () => {
-      const response = await axiosSecure.get(`/users/role?email=${user.email}`);
-      return response.data;
-    },
-  });
+  const { data: userRole } = useUserRole(user?.email);
 
   const dashboardPath =
     userRole?.user_role === "admin"

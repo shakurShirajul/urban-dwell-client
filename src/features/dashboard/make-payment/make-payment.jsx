@@ -1,22 +1,17 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineArrowRight, HiOutlineBuildingOffice2, HiOutlineHomeModern, HiOutlineSquares2X2 } from "react-icons/hi2";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import { LoadingState, PageHeading } from "@/shared/components/ui/feedback";
 import { formatCurrency } from "@/shared/lib/formatters";
+import useUserProfile from "@/shared/hooks/use-user-profile";
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 const MakePayment = () => {
-  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { data: profile, isLoading } = useQuery({
-    queryKey: ["paymentProfile", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/users/specific/${user.email}`)).data,
-  });
+  const { data: profile, isLoading } = useUserProfile(user?.email);
 
   if (isLoading) return <LoadingState label="Loading payment details…" />;
 

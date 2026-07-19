@@ -1,21 +1,17 @@
 import { useContext, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { HiOutlinePlus, HiOutlineXMark } from "react-icons/hi2";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import useAxiosSecure from "@/shared/hooks/use-axios-secure";
-import { publicApi } from "@/shared/api/http-clients";
 import CouponCodeTable from "./coupon-code-table";
 import { EmptyState, LoadingState, PageHeading } from "@/shared/components/ui/feedback";
+import useCoupons from "@/features/coupons/hooks/use-coupons";
 
 const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
   const { successToast, errorToast } = useContext(AuthContext);
   const dialogRef = useRef(null);
   const [isSaving, setIsSaving] = useState(false);
-  const { data: coupons = [], refetch, isLoading } = useQuery({
-    queryKey: ["couponCodes"],
-    queryFn: async () => (await publicApi.get("/coupon-code")).data,
-  });
+  const { data: coupons = [], refetch, isLoading } = useCoupons();
 
   const createCoupon = async (event) => {
     event.preventDefault();

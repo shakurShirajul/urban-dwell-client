@@ -1,11 +1,10 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { HiOutlineMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import PaymentHistoryTable from "./payment-history-table";
 import { EmptyState, LoadingState, PageHeading } from "@/shared/components/ui/feedback";
+import usePaymentHistory from "./hooks/use-payment-history";
 
 const monthNames = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 
@@ -16,17 +15,10 @@ const normalizeMonth = (input) => {
 };
 
 const PaymentHistory = () => {
-  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const month = searchParams.get("month") || "";
-  const { data: payments = [], isLoading, isError } = useQuery({
-    queryKey: ["paymentHistory", user?.email, month],
-    queryFn: async () => {
-      const endpoint = month ? `/apartment-rent-info/search?email=${user.email}&month=${month}` : `/apartment-rent-info?email=${user.email}`;
-      return (await axiosSecure.get(endpoint)).data;
-    },
-  });
+  const { data: payments = [], isLoading, isError } = usePaymentHistory(user?.email, month);
 
   const search = (event) => {
     event.preventDefault();

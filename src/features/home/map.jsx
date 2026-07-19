@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 const position = [40.748817, -73.985428];
 const Map = () => {
   return (
-    <div className="h-full min-h-[32rem]">
+    <div className="relative z-0 h-full min-h-[32rem] isolate">
       <MapContainer center={position} zoom={14} className="h-full min-h-[32rem]">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

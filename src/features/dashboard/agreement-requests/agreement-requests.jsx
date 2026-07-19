@@ -1,17 +1,14 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 import AgreementRequestsTable from "./agreement-requests-table";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { EmptyState, LoadingState, PageHeading } from "@/shared/components/ui/feedback";
+import useAgreementRequests from "./hooks/use-agreement-requests";
 
 const AgreementRequests = () => {
   const { user, successToast, updateToast, errorToast } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-  const { data: requests = [], refetch, isLoading } = useQuery({
-    queryKey: ["agreementRequests", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/agreements/requests?email=${user.email}`)).data,
-  });
+  const { data: requests = [], refetch, isLoading } = useAgreementRequests(user?.email);
 
   const updateRequest = async (id, status) => {
     if (status === "rejected" && !window.confirm("Reject this agreement request? The applicant will lose this request.")) return;

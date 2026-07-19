@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
@@ -17,9 +16,9 @@ import {
   HiOutlineXMark,
 } from "react-icons/hi2";
 import logo from "@/assets/images/logo/urban-dwell.png";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import { LoadingState } from "@/shared/components/ui/feedback";
+import useUserRole from "@/shared/hooks/use-user-role";
 
 const adminNavigation = [
   ["Overview", "/dashboard/adminprofile", HiOutlineBuildingOffice2],
@@ -42,21 +41,13 @@ const userNavigation = [
 ];
 
 const DashboardLayout = () => {
-  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => setSidebarOpen(false), [location]);
 
-  const { data: role, isLoading } = useQuery({
-    queryKey: ["role", user?.email],
-    enabled: Boolean(user?.email),
-    queryFn: async () => {
-      const response = await axiosSecure.get(`/users/role?email=${user.email}`);
-      return response.data;
-    },
-  });
+  const { data: role, isLoading } = useUserRole(user?.email);
 
   if (isLoading) return <LoadingState label="Preparing your dashboard…" />;
 

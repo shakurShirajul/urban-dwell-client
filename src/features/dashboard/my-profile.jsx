@@ -1,24 +1,16 @@
 import { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
 import { HiOutlineBuildingOffice2, HiOutlineCalendarDays, HiOutlineHomeModern, HiOutlineSquares2X2 } from "react-icons/hi2";
 import { AuthContext } from "@/shared/contexts/auth-context";
-import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import { LoadingState, PageHeading } from "@/shared/components/ui/feedback";
 import { formatDate } from "@/shared/lib/formatters";
+import useUserRole from "@/shared/hooks/use-user-role";
+import useUserProfile from "@/shared/hooks/use-user-profile";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
-  const axiosSecure = useAxiosSecure();
-
-  const { data: role, isLoading: roleLoading } = useQuery({
-    queryKey: ["role", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/users/role?email=${user.email}`)).data,
-  });
-  const { data: userData, isLoading: userLoading } = useQuery({
-    queryKey: ["userProfile", user?.email],
-    queryFn: async () => (await axiosSecure.get(`/users/specific/${user.email}`)).data,
-  });
+  const { data: role, isLoading: roleLoading } = useUserRole(user?.email);
+  const { data: userData, isLoading: userLoading } = useUserProfile(user?.email);
 
   if (roleLoading || userLoading) return <LoadingState label="Loading your home…" />;
   if (role?.user_role === "admin") return <Navigate to="/dashboard/adminprofile" replace />;

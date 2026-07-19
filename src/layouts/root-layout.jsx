@@ -13,13 +13,31 @@ const RootLayout = () => {
       return;
     }
 
-    window.requestAnimationFrame(() => {
-      document.querySelector(location.hash)?.scrollIntoView();
+    const scrollToSection = () => {
+      const section = document.querySelector(location.hash);
+      if (!section) return false;
+      section.scrollIntoView({ block: "start" });
+      return true;
+    };
+
+    if (scrollToSection()) return;
+
+    const content = document.getElementById("main-content");
+    const observer = new MutationObserver(() => {
+      if (scrollToSection()) observer.disconnect();
     });
-  }, [location]);
+
+    observer.observe(content, { childList: true, subtree: true });
+    const timeout = window.setTimeout(() => observer.disconnect(), 5000);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timeout);
+    };
+  }, [location.hash, location.pathname]);
 
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="flex min-h-dvh flex-col bg-base-200">
       <Helmet>
         <title>Home | Urban Dwell</title>
       </Helmet>
@@ -27,7 +45,7 @@ const RootLayout = () => {
         Skip to content
       </a>
       <Nav />
-      <main id="main-content">
+      <main id="main-content" className="min-h-dvh flex-1">
         <Outlet />
       </main>
       <Footer />

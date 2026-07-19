@@ -4,10 +4,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import router from "./Routes/router";
+import router from "@/app/router";
 import { HelmetProvider } from "react-helmet-async";
 
-import AuthProviders from "./Providers/AuthProviders";
+import AuthProvider from "@/app/auth/auth-provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   QueryClient,
@@ -19,11 +21,17 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProviders>
+      <AuthProvider>
         <HelmetProvider>
           <RouterProvider router={router} />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            newestOnTop
+            theme="colored"
+          />
         </HelmetProvider>
-      </AuthProviders>
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

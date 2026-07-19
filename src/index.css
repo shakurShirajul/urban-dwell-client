@@ -1,11 +1,197 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-urbanJungle: "urbanJungle", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --color-atrium: #f4f7f5;
+  --color-steel: #15343a;
+  --color-garden: #2f6b4f;
+  --color-skyglass: #bfd7da;
+  --color-brass: #d7a85b;
+  --color-ink: #162022;
+}
 
 @font-face {
-    font-family: 'urbanJungle';
-    src: url("assets/font/Urbanjungledemo-ymAm.otf") format("truetype"), ;
+  font-family: "urbanJungle";
+  font-display: swap;
+  src: url("./assets/fonts/urban-jungle.otf") format("opentype");
+}
+
+:root,
+[data-theme="light"],
+[data-theme="cupcake"] {
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f4f7f5;
+  --color-base-300: #dfe8e4;
+  --color-base-content: #162022;
+  --color-primary: #2f6b4f;
+  --color-primary-content: #ffffff;
+  --color-secondary: #15343a;
+  --color-secondary-content: #ffffff;
+  --color-accent: #d7a85b;
+  --color-accent-content: #162022;
+  --color-neutral: #15343a;
+  --color-neutral-content: #ffffff;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-base-100: #132528;
+  --color-base-200: #0e1c1f;
+  --color-base-300: #234045;
+  --color-base-content: #edf4f1;
+  --color-primary: #78b694;
+  --color-primary-content: #0d2117;
+  --color-secondary: #bfd7da;
+  --color-secondary-content: #102a2f;
+  --color-accent: #e5bd78;
+  --color-accent-content: #241b0d;
+  --color-neutral: #bfd7da;
+  --color-neutral-content: #102a2f;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  background: var(--color-base-200);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--color-base-200);
+  color: var(--color-base-content);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: rgb(47 107 79 / 0.14);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #162022;
+}
+
+.app-shell {
+  width: min(100% - 2rem, 80rem);
+  margin-inline: auto;
+}
+
+.section-space {
+  padding-block: clamp(4.5rem, 8vw, 8rem);
+}
+
+.display-title {
+  max-width: 13ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 6.75rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.surface-card {
+  border: 1px solid color-mix(in oklab, var(--color-base-content) 12%, transparent);
+  border-radius: 1.5rem;
+  background: var(--color-base-100);
+  box-shadow: 0 1.5rem 4rem rgb(21 52 58 / 0.07);
+}
+
+.field-control {
+  width: 100%;
+  min-height: 3.25rem;
+  border: 1px solid color-mix(in oklab, var(--color-base-content) 18%, transparent);
+  border-radius: 0.85rem;
+  background: var(--color-base-100);
+  color: var(--color-base-content);
+  padding: 0.75rem 1rem;
+}
+
+.field-control:focus {
+  border-color: var(--color-primary);
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.architectural-grid {
+  background-image:
+    linear-gradient(rgb(21 52 58 / 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(21 52 58 / 0.09) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,156 +1,196 @@
 # Urban Dwell
 
-Urban Dwell is a responsive building-management web application for apartment discovery, resident services, and administrative operations. Visitors can explore available apartments and request an agreement, while authenticated residents and administrators receive role-specific dashboards.
-
-[View the live application](https://urbandwell.netlify.app/)
+Urban Dwell is a role-based apartment management web application. Visitors can
+explore available apartments and request an agreement, while residents, members,
+and administrators receive dedicated dashboard experiences for announcements,
+rent payments, agreements, coupons, and member management.
 
 ## Features
 
-- Browse available apartments with pagination and agreement requests
-- Authenticate with email/password or Google through Firebase
-- Access protected, member-only, and administrator-only routes
-- Manage apartment agreements, members, coupons, and announcements
-- Complete rent payments with Stripe and review payment history
-- Explore the building location with an interactive Leaflet map
-- Switch between responsive light and dark interfaces
-- Cache and synchronize server data with dedicated TanStack Query hooks
+- Public landing page with apartment highlights, coupons, and an interactive map
+- Apartment browsing and agreement requests
+- Email/password and Google authentication through Firebase
+- Server-verified authentication with signed, HTTP-only session cookies
+- Role-protected dashboards for users, members, and administrators
+- Stripe-powered rent payments and payment history
+- Announcement, coupon, agreement, and member administration
+- Responsive layouts with loading, empty, error, and unauthorized states
 
-## Technology stack
+## Technology
 
-| Area | Technology |
+- [Next.js](https://nextjs.org/) App Router
+- React 19 and strict TypeScript
+- Tailwind CSS 4 and DaisyUI 5
+- Firebase Authentication and Firebase Admin
+- TanStack Query and Axios
+- React Hook Form
+- Stripe Elements
+- React Leaflet
+- Zod and JOSE
+
+## Prerequisites
+
+Before running the project, install or provision:
+
+- Node.js 20.9 or newer
+- npm
+- A running Urban Dwell backend API
+- A Firebase project with client and service-account credentials
+- Stripe publishable credentials for rent payments
+- An ImgBB API key for image uploads
+
+## Getting Started
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Create the local environment file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Fill in the required values in `.env`.
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000).
+
+## Environment Variables
+
+The checked-in [.env.example](./.env.example) file is the source of truth for
+local configuration.
+
+### Browser-safe configuration
+
+| Variable | Description |
 | --- | --- |
-| Application | React 18, Vite 5, React Router 6 |
-| Styling | Tailwind CSS 4, DaisyUI 5 |
-| Server state | TanStack Query 5, Axios |
-| Forms | React Hook Form |
-| Authentication | Firebase Authentication, JWT API sessions |
-| Payments | Stripe Elements |
-| Maps | Leaflet, React Leaflet |
-| Metadata | React Helmet Async |
+| `NEXT_PUBLIC_FIREBASE_API_KEY` | Firebase Web API key |
+| `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | Firebase Authentication domain |
+| `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | Firebase project ID |
+| `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | Firebase Storage bucket |
+| `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | Firebase messaging sender ID |
+| `NEXT_PUBLIC_FIREBASE_APP_ID` | Firebase application ID |
+| `NEXT_PUBLIC_IMAGE_HOSTING_KEY` | ImgBB API key |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key |
+| `NEXT_PUBLIC_API_URL` | Backend origin, with or without a trailing `/api` |
+| `NEXT_PUBLIC_SITE_URL` | Canonical application URL used by Next.js metadata |
 
-## Getting started
+### Server-only configuration
 
-### Prerequisites
-
-- Node.js 18 or newer
-- npm 9 or newer
-- A Firebase web application
-- Access to a compatible Urban Dwell API
-- Stripe and ImgBB credentials for payment and profile-image features
-
-### Installation
-
-```bash
-git clone git@github.com:shakurShirajul/urban-dwell-client.git
-cd urban-dwell-client
-npm install
-cp .env.example .env
-```
-
-Add your local credentials to `.env`, then start the development server:
-
-```bash
-npm run dev
-```
-
-Vite prints the local development URL in the terminal, typically `http://localhost:5173`.
-
-## Environment variables
-
-All client environment variables must begin with `VITE_`. Copy `.env.example` and configure the following values:
-
-| Variable | Purpose |
+| Variable | Description |
 | --- | --- |
-| `VITE_apiKey` | Firebase web API key |
-| `VITE_authDomain` | Firebase authentication domain |
-| `VITE_projectId` | Firebase project identifier |
-| `VITE_storageBucket` | Firebase storage bucket |
-| `VITE_messagingSenderId` | Firebase messaging sender identifier |
-| `VITE_appId` | Firebase application identifier |
-| `VITE_IMAGE_HOSTING_KEY` | ImgBB API key for profile-image uploads |
-| `VITE_PAYMENT_GATEWAY_PK` | Stripe publishable key |
-| `VITE_API_URL` | Backend API base URL |
+| `NEXT_SESSION_SECRET` | Secret used to sign application sessions; use at least 32 random bytes |
+| `FIREBASE_ADMIN_PROJECT_ID` | Firebase Admin project ID |
+| `FIREBASE_ADMIN_CLIENT_EMAIL` | Firebase service-account email |
+| `FIREBASE_ADMIN_PRIVATE_KEY` | Firebase service-account private key, including escaped `\n` line breaks |
 
-> Every `VITE_*` value is bundled into browser code. Never place Firebase service-account credentials, Stripe secret keys, JWT secrets, or other private server credentials in this file.
+Never prefix secrets or Firebase Admin credentials with `NEXT_PUBLIC_`, and never
+commit a populated `.env` file.
 
-## Available commands
+## Available Commands
 
-```bash
-npm run dev      # Start the Vite development server
-npm run lint     # Run ESLint; warnings fail the command
-npm run build    # Create an optimized production build in dist/
-npm run preview  # Preview the production build locally
-```
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Next.js development server |
+| `npm run typecheck` | Check strict TypeScript without emitting files |
+| `npm run lint` | Run ESLint and fail on warnings |
+| `npm run test` | Run the currently configured validation test (TypeScript checking) |
+| `npm run build` | Create an optimized production build |
+| `npm start` | Serve the production build |
 
-Before submitting a change, run:
+No unit or integration test runner is configured yet. Type checking, linting, a
+production build, and manual browser verification are the current quality gates.
 
-```bash
-npm run lint && npm run build
-```
-
-## Project structure
+## Project Structure
 
 ```text
 src/
-├── app/                 # Router, authentication provider, and route guards
+├── app/
+│   ├── (auth)/          # Login and signup routes
+│   ├── (public)/        # Public pages and layout
+│   ├── api/             # Session exchange and authenticated backend proxy
+│   ├── dashboard/       # Role-protected dashboard routes and layouts
+│   ├── layout.tsx       # Root layout and metadata
+│   └── providers.tsx    # Application-level client providers
 ├── assets/              # Bundled images and fonts
-├── features/            # Feature-owned pages, components, and query hooks
-│   ├── apartments/
-│   ├── auth/
-│   ├── coupons/
-│   ├── dashboard/
-│   └── home/
-├── layouts/             # Public and dashboard application shells
-├── shared/
-│   ├── api/             # Public and authenticated HTTP clients
-│   ├── components/      # Reusable UI and feedback components
-│   ├── contexts/        # Shared React contexts
-│   ├── hooks/           # Cross-feature hooks
-│   └── lib/             # Firebase and shared utilities
-├── index.css            # Tailwind, DaisyUI, theme tokens, and global styles
-└── main.jsx             # Application providers and React entry point
+├── features/            # Domain UI, forms, and feature-specific hooks
+├── layouts/             # Shared application shells
+├── server/              # Server environment, Firebase Admin, and sessions
+├── shared/              # Reusable API, components, contexts, hooks, and utilities
+└── types/               # Shared domain types
 ```
 
-Feature-specific code should stay inside its feature directory. Shared UI should remain presentation-focused, while API calls, query keys, mutations, and cache invalidation belong in dedicated hooks.
+Cross-feature imports use the `@/` alias. Feature-private modules stay beside
+their owning feature, and shared modules do not depend on `app/` or `features/`.
 
-The `@` import alias points to `src`, so imports can use paths such as:
+## Routes and Access
 
-```jsx
-import { publicApi } from "@/shared/api/http-clients";
-```
-
-## Main routes
-
-| Route | Access | Description |
+| Route | Access | Purpose |
 | --- | --- | --- |
-| `/` | Public | Marketing home page |
-| `/apartments` | Public | Available apartment listings |
-| `/login` | Public | Resident sign-in |
-| `/signup` | Public | Account registration |
-| `/dashboard/*` | Authenticated | Role-aware resident and admin tools |
+| `/` | Public | Landing page |
+| `/apartments` | Public | Browse apartments and request an agreement |
+| `/login`, `/signup` | Public | Authentication |
+| `/dashboard/myprofile` | Any authenticated role | Resident profile |
+| `/dashboard/announcement` | Any authenticated role | Building announcements |
+| `/dashboard/makepayment` | Member | Prepare a rent payment |
+| `/dashboard/paymentpage` | Member | Complete a Stripe payment |
+| `/dashboard/paymenthistory` | Member | View rent payment history |
+| `/dashboard/adminprofile` | Admin | Administrative overview |
+| `/dashboard/managemember` | Admin | Manage members |
+| `/dashboard/makeannouncement` | Admin | Publish announcements |
+| `/dashboard/agreementrequest` | Admin | Review apartment agreements |
+| `/dashboard/managecoupons` | Admin | Manage payment coupons |
+| `/unauthorized` | Public | Role-access error page |
 
-Dashboard pages are further protected with private, member, and administrator route guards.
+The backend uses three roles:
 
-## Data and authentication flow
+- `user`: an authenticated resident who has not yet become a member
+- `member`: a resident with access to rent payment features
+- `admin`: a building administrator
 
-Firebase manages browser authentication. After Firebase resolves the signed-in user, the client exchanges the user's email with the API for a JWT and stores it in local storage. Authenticated Axios requests attach that token through the secure API hook.
+## Authentication Architecture
 
-TanStack Query handles remote data. Components consume feature hooks rather than calling queries directly, which centralizes cache keys, request behavior, loading state, mutations, and invalidation.
+Firebase handles user authentication in the browser. After sign-in, the
+application verifies the Firebase ID token on the server and stores the resulting
+application session in a signed, HTTP-only cookie.
+
+Protected layouts validate that session and refresh the user's current role from
+the backend before rendering. Authenticated browser requests go through
+`/api/backend/[...path]`, which adds the backend token on the server. This keeps
+the token out of browser storage and client-side application code.
+
+Sessions expire after one hour. Invalid sessions redirect to `/login`, while
+authenticated users without the required role are sent to `/unauthorized`.
+
+## Verification
+
+Run the complete project checks before submitting a change:
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```
+
+For UI changes, also check the affected routes at desktop and mobile widths.
+Exercise relevant loading, empty, error, authentication, and role-restricted
+states.
 
 ## Deployment
 
-Run `npm run build` and deploy the generated `dist/` directory. Because the application uses client-side routing, configure the hosting provider to rewrite unknown routes to `/index.html`.
+Deploy Urban Dwell to a Next.js-compatible Node.js host:
 
-Set all required environment variables in the hosting provider before building. Use a Stripe publishable key in the client and keep all secret credentials on the backend.
+1. Configure all required environment variables in the hosting platform.
+2. Run `npm run build`.
+3. Start the application with `npm start`.
 
-## Quality checks
-
-The repository currently uses ESLint and the production build as its required automated checks. No automated test runner is configured yet. Manually verify affected routes at mobile and desktop widths, including loading, empty, error, authentication, and role-restricted states.
-
-## Contributing
-
-- Use ES modules and functional React components.
-- Use kebab-case for JavaScript and JSX filenames.
-- Keep reusable server-state logic in custom query hooks.
-- Prefer existing Tailwind utilities, theme tokens, and shared components.
-- Keep changes focused and include screenshots for visible UI updates.
+The application uses dynamic server rendering, server-side authentication, and
+route handlers. It cannot be deployed as a static `out/` directory.

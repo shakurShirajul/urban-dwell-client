@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import type { UserRole } from "@/types/domain";
@@ -14,7 +13,7 @@ const useUserRole = (email?: string | null) => {
     queryKey: userRoleQueryKey(email),
     enabled: Boolean(email),
     queryFn: async () => {
-      const response = await axiosSecure.get(`/users/role?email=${email}`);
+      const response = await axiosSecure.get("/users/role", { params: { email } });
       return response.data as { user_role: UserRole };
     },
   });

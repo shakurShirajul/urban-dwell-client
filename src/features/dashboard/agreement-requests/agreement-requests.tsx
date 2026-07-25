@@ -16,7 +16,7 @@ const AgreementRequests = () => {
   const updateRequest = async (id: string, status: "accepted" | "rejected") => {
     if (status === "rejected" && !window.confirm("Reject this agreement request? The applicant will lose this request.")) return;
     try {
-      await axiosSecure.patch(`/agreements/requests/updates?status=${status}&id=${id}&email=${user?.email}`);
+      await axiosSecure.patch("/agreements/requests/updates", undefined, { params: { status, id } });
       await refetch();
       if (status === "accepted") successToast("Agreement accepted");
       else updateToast("Agreement rejected");

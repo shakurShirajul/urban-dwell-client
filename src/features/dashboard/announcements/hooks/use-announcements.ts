@@ -11,7 +11,7 @@ const useAnnouncements = (email?: string | null) => {
   return useQuery({
     queryKey: ["announcements", email],
     enabled: Boolean(email),
-    queryFn: async () => (await axiosSecure.get<Announcement[]>(`/announcements?email=${email}`)).data,
+    queryFn: async () => (await axiosSecure.get<Announcement[]>("/announcements", { params: { email } })).data,
   });
 };
 

@@ -17,7 +17,7 @@ const ManageMembers = () => {
   const removeMember = async (member: UrbanUser) => {
     if (!window.confirm(`Remove ${member.user_name} as a member? Their resident access will change immediately.`)) return;
     try {
-      await axiosSecure.patch(`/users/role?email=${user?.email}`, { id: member._id });
+      await axiosSecure.patch("/users/role", { id: member._id });
       await refetch();
       successToast("Member removed");
     } catch {

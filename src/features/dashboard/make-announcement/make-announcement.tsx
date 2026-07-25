@@ -14,7 +14,7 @@ const MakeAnnouncement = () => {
   const publishAnnouncement = async (form: HTMLFormElement) => {
     const data = new FormData(form);
     try {
-      await axiosSecure.post(`/announcement?email=${user?.email}`, {
+      await axiosSecure.post("/announcement", {
         announce_title: String(data.get("title")),
         announce_description: String(data.get("description")),
         announce_author_email: user?.email,

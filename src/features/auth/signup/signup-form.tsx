@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import { AuthContext } from "@/shared/contexts/auth-context";
-import { publicApi } from "@/shared/api/http-clients";
+import axios from "axios";
+import { secureApi } from "@/shared/api/http-clients";
 import { FirebaseError } from "firebase/app";
 
 const imageHostingKey = process.env.NEXT_PUBLIC_IMAGE_HOSTING_KEY;
@@ -24,7 +25,7 @@ const SignupForm = () => {
   const onSubmit = async (data: SignupFields) => {
     setSubmitError("");
     try {
-      const imageResponse = await publicApi.post(
+      const imageResponse = await axios.post(
         imageHostingApi,
         { image: data.image[0] },
         { headers: { "content-type": "multipart/form-data" } },
@@ -32,7 +33,7 @@ const SignupForm = () => {
       const imageUrl = imageResponse.data.data.display_url;
       await signUp(data.email, data.password);
       await updateUser(data.name, imageUrl);
-      await publicApi.post("/users", { email: data.email, name: data.name, image: imageUrl });
+      await secureApi.post("/users", { email: data.email, name: data.name, image: imageUrl });
       successToast("Account created successfully");
       router.replace("/");
     } catch (error: unknown) {

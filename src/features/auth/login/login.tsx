@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "@/shared/contexts/auth-context";
 import LoginForm from "./login-form";
-import { publicApi } from "@/shared/api/http-clients";
+import { secureApi } from "@/shared/api/http-clients";
 import AuthShell from "@/features/auth/auth-shell";
 
 const Login = () => {
@@ -27,9 +27,9 @@ const Login = () => {
     setIsGooglePending(true);
     try {
       const result = await googleSignIn();
-      await publicApi.post("/users", {
+      await secureApi.post("/users", {
         email: result.user.email,
-        name: result.user.displayName,
+        name: result.user.displayName ?? result.user.email?.split("@")[0] ?? "Resident",
         image: result.user.photoURL,
       });
       successToast("Signed in successfully");

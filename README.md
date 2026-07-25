@@ -61,7 +61,7 @@ Before running the project, install or provision:
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000).
+5. Open [http://localhost:3000](http://localhost:3000).w
 
 ## Environment Variables
 
@@ -80,19 +80,16 @@ local configuration.
 | `NEXT_PUBLIC_FIREBASE_APP_ID` | Firebase application ID |
 | `NEXT_PUBLIC_IMAGE_HOSTING_KEY` | ImgBB API key |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key |
-| `NEXT_PUBLIC_API_URL` | Backend origin, with or without a trailing `/api` |
 | `NEXT_PUBLIC_SITE_URL` | Canonical application URL used by Next.js metadata |
 
 ### Server-only configuration
 
 | Variable | Description |
 | --- | --- |
+| `API_URL` | Backend origin, with or without a trailing `/api` |
 | `NEXT_SESSION_SECRET` | Secret used to sign application sessions; use at least 32 random bytes |
-| `FIREBASE_ADMIN_PROJECT_ID` | Firebase Admin project ID |
-| `FIREBASE_ADMIN_CLIENT_EMAIL` | Firebase service-account email |
-| `FIREBASE_ADMIN_PRIVATE_KEY` | Firebase service-account private key, including escaped `\n` line breaks |
 
-Never prefix secrets or Firebase Admin credentials with `NEXT_PUBLIC_`, and never
+Never prefix secrets with `NEXT_PUBLIC_`, and never
 commit a populated `.env` file.
 
 ## Available Commands
@@ -159,7 +156,8 @@ The backend uses three roles:
 ## Authentication Architecture
 
 Firebase handles user authentication in the browser. After sign-in, the
-application verifies the Firebase ID token on the server and stores the resulting
+backend verifies the Firebase ID token against Firebase public signing keys and
+stores the resulting
 application session in a signed, HTTP-only cookie.
 
 Protected layouts validate that session and refresh the user's current role from

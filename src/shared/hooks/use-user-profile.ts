@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "@/shared/hooks/use-axios-secure";
 import type { UserProfile } from "@/types/domain";
@@ -14,7 +13,7 @@ const useUserProfile = (email?: string | null) => {
     queryKey: userProfileQueryKey(email),
     enabled: Boolean(email),
     queryFn: async () => {
-      const response = await axiosSecure.get(`/users/specific/${email}`);
+      const response = await axiosSecure.get(`/users/specific/${encodeURIComponent(email!)}`);
       return response.data as UserProfile;
     },
   });

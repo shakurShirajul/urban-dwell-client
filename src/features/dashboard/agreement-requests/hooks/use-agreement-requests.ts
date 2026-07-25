@@ -11,7 +11,7 @@ const useAgreementRequests = (email?: string | null) => {
   return useQuery({
     queryKey: ["agreement-requests", email],
     enabled: Boolean(email),
-    queryFn: async () => (await axiosSecure.get<Agreement[]>(`/agreements/requests?email=${email}`)).data,
+    queryFn: async () => (await axiosSecure.get<Agreement[]>("/agreements/requests", { params: { email } })).data,
   });
 };
 

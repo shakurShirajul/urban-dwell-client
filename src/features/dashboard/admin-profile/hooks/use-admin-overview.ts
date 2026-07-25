@@ -10,7 +10,7 @@ export const useAdminProfile = (email?: string | null) => {
   return useQuery({
     queryKey: ["admin-profile", email],
     enabled: Boolean(email),
-    queryFn: async () => (await axiosSecure.get(`/admin/info?email=${email}`)).data,
+    queryFn: async () => (await axiosSecure.get("/admin/info", { params: { email } })).data,
   });
 };
 
@@ -20,6 +20,6 @@ export const useAdminStats = (email?: string | null) => {
   return useQuery({
     queryKey: ["admin-stats", email],
     enabled: Boolean(email),
-    queryFn: async () => (await axiosSecure.get(`/admin/stats?email=${email}`)).data,
+    queryFn: async () => (await axiosSecure.get("/admin/stats")).data,
   });
 };

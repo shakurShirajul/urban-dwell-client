@@ -33,7 +33,7 @@ const CheckoutForm = ({ paymentData }: { paymentData: PaymentData }) => {
 
   useEffect(() => {
     let active = true;
-    axiosSecure.post("/create-payment-intern", { amount: rent, coupon: appliedCoupon })
+    axiosSecure.post("/create-payment-intern", { amount: rent, ...(appliedCoupon ? { coupon: appliedCoupon } : {}) })
       .then((response) => {
         if (!active) return;
         setClientSecret(response.data.clientSecret);
@@ -81,13 +81,13 @@ const CheckoutForm = ({ paymentData }: { paymentData: PaymentData }) => {
     if (paymentIntent?.status === "succeeded") {
       try {
         await axiosSecure.post("/apartment-rent-info", {
-          name: user.displayName,
+          name: user.displayName ?? user.email.split("@")[0] ?? "Resident",
           email: user.email,
           transactionId: paymentIntent.id,
           rent,
           month: paymentData.month,
           discount,
-          coupon: appliedCoupon,
+          ...(appliedCoupon ? { coupon: appliedCoupon } : {}),
         });
         successToast("Rent payment completed");
         router.replace("/dashboard/paymenthistory");

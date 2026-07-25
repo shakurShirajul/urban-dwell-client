@@ -18,14 +18,14 @@ const useApartmentRequest = () => {
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: async (apartment: Apartment) => axiosSecure.post(`/agreement?email=${user?.email}`, {
+    mutationFn: async (apartment: Apartment) => axiosSecure.post("/agreement", {
       user_name: user?.displayName ?? "Resident",
       user_email: user?.email ?? "",
       floor_no: apartment.floor_no,
       block_name: apartment.block_name,
       apartment_no: apartment.apartment_no,
       rent: apartment.rent,
-    }),
+    }, { params: { email: user?.email } }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: apartmentQueryKeys.agreement(user?.email) });
       successToast("Apartment request submitted");

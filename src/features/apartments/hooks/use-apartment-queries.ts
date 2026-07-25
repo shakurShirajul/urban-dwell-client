@@ -19,7 +19,7 @@ export const useApartmentAgreement = (email?: string | null) => {
     queryKey: apartmentQueryKeys.agreement(email),
     enabled: Boolean(email),
     queryFn: async () => {
-      const response = await axiosSecure.get(`/agreement?email=${email}`);
+      const response = await axiosSecure.get("/agreement", { params: { email } });
       return response.data as Agreement[];
     },
   });

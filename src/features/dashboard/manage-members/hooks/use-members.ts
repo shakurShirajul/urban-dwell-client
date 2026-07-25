@@ -11,7 +11,7 @@ const useMembers = (email?: string | null) => {
   return useQuery({
     queryKey: ["members", email],
     enabled: Boolean(email),
-    queryFn: async () => (await axiosSecure.get<UrbanUser[]>(`/users/members?email=${email}`)).data,
+    queryFn: async () => (await axiosSecure.get<UrbanUser[]>("/users/members", { params: { email } })).data,
   });
 };
 

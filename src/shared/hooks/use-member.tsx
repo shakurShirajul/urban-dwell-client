@@ -14,7 +14,7 @@ const useMember = () => {
     queryKey: ["role", "member", user?.email],
     enabled: !loading && Boolean(user?.email),
     queryFn: async () => {
-      const response = await axiosSecure.get(`/users/checking?role=member&email=${user?.email}`);
+      const response = await axiosSecure.get("/users/checking", { params: { role: "member", email: user?.email } });
       return response.data?.validation;
     },
   });

@@ -35,9 +35,9 @@ export async function POST(request: Request): Promise<NextResponse> {
       cache: "no-store",
     });
     const roleData = roleResponse.ok
-      ? await roleResponse.json() as { user_role?: UserRole }
+      ? await roleResponse.json() as { user_role?: UserRole } | null
       : {};
-    const role = roleData.user_role && validRoles.has(roleData.user_role) ? roleData.user_role : "user";
+    const role = roleData?.user_role && validRoles.has(roleData.user_role) ? roleData.user_role : "user";
 
     const session: SessionUser = {
       email: user.email,

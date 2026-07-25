@@ -38,7 +38,15 @@ const SignupForm = () => {
       router.replace("/");
     } catch (error: unknown) {
       const duplicateEmail = error instanceof FirebaseError && error.code === "auth/email-already-in-use";
-      setSubmitError(duplicateEmail ? "This email already has an account. Sign in instead." : "Your account could not be created. Check the form and try again.");
+      if (duplicateEmail) {
+        setSubmitError("This email already has an account. Sign in instead.");
+      } else if (axios.isAxiosError<{ message?: string }>(error)) {
+        setSubmitError(error.response?.data?.message ?? "A service required to create your account is unavailable.");
+      } else if (error instanceof Error) {
+        setSubmitError(error.message);
+      } else {
+        setSubmitError("Your account could not be created. Check the form and try again.");
+      }
     }
   };
 

@@ -58,7 +58,12 @@ export async function POST(request: Request): Promise<NextResponse> {
   } catch (error) {
     console.error("Unable to create session", error);
     await clearSessionCookie();
-    return NextResponse.json({ message: "Unable to create session" }, { status: 500 });
+    const configurationError = error instanceof Error
+      && error.message.startsWith("Missing required server environment variable:");
+    return NextResponse.json(
+      { message: configurationError ? "Server session configuration is missing" : "Unable to create session" },
+      { status: 500 },
+    );
   }
 }
 

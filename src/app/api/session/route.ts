@@ -13,8 +13,11 @@ type TokenExchange = {
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
+  let stage = "request validation";
+
   try {
     const { idToken } = requestSchema.parse(await request.json());
+    stage = "API token exchange";
     const tokenResponse = await fetch(`${apiBaseUrl}/jwt`, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -30,6 +33,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
 
     const { token: apiToken, user } = await tokenResponse.json() as TokenExchange;
+    stage = "role lookup";
     const roleResponse = await fetch(`${apiBaseUrl}/users/role?${new URLSearchParams({ email: user.email })}`, {
       headers: { authorization: `Bearer ${apiToken}` },
       cache: "no-store",
@@ -46,7 +50,10 @@ export async function POST(request: Request): Promise<NextResponse> {
       role,
       apiToken,
     };
-    await setSessionCookie(await createSessionToken(session));
+    stage = "session signing";
+    const sessionToken = await createSessionToken(session);
+    stage = "cookie creation";
+    await setSessionCookie(sessionToken);
     return NextResponse.json({
       user: {
         email: session.email,
@@ -56,12 +63,16 @@ export async function POST(request: Request): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    console.error("Unable to create session", error);
+    console.error(`Unable to create session during ${stage}`, error);
     await clearSessionCookie();
     const configurationError = error instanceof Error
       && error.message.startsWith("Missing required server environment variable:");
     return NextResponse.json(
-      { message: configurationError ? "Server session configuration is missing" : "Unable to create session" },
+      {
+        message: configurationError
+          ? "Server session configuration is missing"
+          : `Unable to create session during ${stage}`,
+      },
       { status: 500 },
     );
   }

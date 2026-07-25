@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -24,13 +24,20 @@ const navigation = [
   { label: "Visit", hash: "visit" },
 ];
 
+const subscribeToHydration = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 const Nav = () => {
   const authContext = useContext(AuthContext);
   if (!authContext) throw new Error("Nav must be rendered within AuthProvider");
   const { user, logOut } = authContext;
   const pathname = usePathname();
   const profileRef = useRef<HTMLDivElement>(null);
-  const [theme, setTheme] = useState(() => typeof window === "undefined" ? "light" : localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState<"light" | "dark">(() =>
+    typeof window !== "undefined" && localStorage.getItem("theme") === "dark" ? "dark" : "light"
+  );
+  const hydrated = useSyncExternalStore(subscribeToHydration, getClientSnapshot, getServerSnapshot);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -91,9 +98,9 @@ const Nav = () => {
             type="button"
             onClick={toggleTheme}
             className="grid size-11 place-items-center rounded-full border border-base-content/10 bg-base-100 text-xl transition-colors duration-200 hover:bg-base-200"
-            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            aria-label={hydrated && theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           >
-            {theme === "dark" ? <HiOutlineSun aria-hidden="true" /> : <HiOutlineMoon aria-hidden="true" />}
+            {hydrated && theme === "dark" ? <HiOutlineSun aria-hidden="true" /> : <HiOutlineMoon aria-hidden="true" />}
           </button>
 
           {user ? (
@@ -152,7 +159,7 @@ const Nav = () => {
               href="/login"
               className="hidden h-11 items-center rounded-full bg-secondary px-5 text-sm font-bold text-secondary-content transition-transform duration-200 hover:-translate-y-0.5 sm:flex"
             >
-              Resident sign in
+              Sign In
             </Link>
           )}
 
@@ -176,7 +183,7 @@ const Nav = () => {
               href="/login"
               className="app-shell mt-4 flex h-12 items-center justify-center rounded-full bg-secondary font-bold text-secondary-content"
             >
-              Resident sign in
+              Sign In
             </Link>
           ) : null}
         </div>

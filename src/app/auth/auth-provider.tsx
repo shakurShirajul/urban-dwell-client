@@ -31,7 +31,10 @@ const syncServerSession = async (user: User): Promise<void> => {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ idToken }),
   });
-  if (!response.ok) throw new Error("Unable to create secure server session");
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null) as { message?: string } | null;
+    throw new Error(errorData?.message ?? "Unable to create secure server session");
+  }
 };
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -82,6 +85,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         } else {
           await fetch("/api/session", { method: "DELETE" });
         }
+      } catch (error) {
+        console.error("Unable to synchronize server session", error);
       } finally {
         setLoading(false);
         router.refresh();

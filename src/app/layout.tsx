@@ -5,7 +5,7 @@ import "../index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:5000"),
   title: {
     default: "Urban Dwell",
     template: "%s | Urban Dwell",

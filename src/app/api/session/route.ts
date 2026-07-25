@@ -21,7 +21,13 @@ export async function POST(request: Request): Promise<NextResponse> {
       body: JSON.stringify({ idToken }),
       cache: "no-store",
     });
-    if (!tokenResponse.ok) throw new Error("API token exchange failed");
+    if (!tokenResponse.ok) {
+      const errorData = await tokenResponse.json().catch(() => null) as { message?: string } | null;
+      return NextResponse.json(
+        { message: errorData?.message ?? "API token exchange failed" },
+        { status: tokenResponse.status },
+      );
+    }
 
     const { token: apiToken, user } = await tokenResponse.json() as TokenExchange;
     const roleResponse = await fetch(`${apiBaseUrl}/users/role?${new URLSearchParams({ email: user.email })}`, {
@@ -49,9 +55,10 @@ export async function POST(request: Request): Promise<NextResponse> {
         role: session.role,
       },
     });
-  } catch {
+  } catch (error) {
+    console.error("Unable to create session", error);
     await clearSessionCookie();
-    return NextResponse.json({ message: "Unable to create session" }, { status: 401 });
+    return NextResponse.json({ message: "Unable to create session" }, { status: 500 });
   }
 }
 

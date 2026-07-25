@@ -27,3 +27,6 @@ dist-ssr
 *.sln
 *.sw?
 .playwright-mcp
+
+# Local Netlify folder
+.netlify

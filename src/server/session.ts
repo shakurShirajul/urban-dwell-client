@@ -55,7 +55,7 @@ export const requireSession = async (): Promise<SessionUser> => {
   });
   if (!roleResponse.ok) redirect("/login");
 
-  const data = await roleResponse.json() as { user_role?: UserRole } | null;
+  const data = await roleResponse.json().catch(() => null) as { user_role?: UserRole } | null;
   const role: UserRole = data?.user_role === "admin" || data?.user_role === "member" ? data.user_role : "user";
   return { ...session, role };
 };

@@ -14,17 +14,22 @@ const proxy = async (request: NextRequest, context: { params: Promise<{ path: st
     return NextResponse.json({ message: "Not found" }, { status: 404 });
   }
 
-  const target = new URL(`${apiBaseUrl}/${route}`);
-  target.search = request.nextUrl.search;
-  const response = await fetch(target, { cache: "no-store" });
+  try {
+    const target = new URL(`${apiBaseUrl}/${route}`);
+    target.search = request.nextUrl.search;
+    const response = await fetch(target, { cache: "no-store" });
 
-  const headers = new Headers({
-    "content-type": response.headers.get("content-type") ?? "application/json",
-  });
-  const hasMore = response.headers.get("x-has-more");
-  if (hasMore) headers.set("x-has-more", hasMore);
+    const headers = new Headers({
+      "content-type": response.headers.get("content-type") ?? "application/json",
+    });
+    const hasMore = response.headers.get("x-has-more");
+    if (hasMore) headers.set("x-has-more", hasMore);
 
-  return new NextResponse(response.body, { status: response.status, headers });
+    return new NextResponse(response.body, { status: response.status, headers });
+  } catch (error) {
+    console.error(`Unable to proxy public API route: ${route}`, error);
+    return NextResponse.json({ message: "Public API is unavailable" }, { status: 502 });
+  }
 };
 
 export const GET = proxy;

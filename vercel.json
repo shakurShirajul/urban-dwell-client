@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "env": {
+    "API_URL": "https://server-peach-psi.vercel.app"
+  }
+}
